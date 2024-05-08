@@ -1,0 +1,411 @@
+[
+  {
+    "DepartmentId": "51",
+    "DivisionCode": "CAO",
+    "DepartmentCode": "CS",
+    "DepartmentNameEng": "COMPANY SECRETARIAL",
+    "DepartmentNameChi": "公司秘書部",
+    "DefaultPickupUser": "Betty, Yuen Wan LAM, Thera, Mei Kuen LEUNG",
+    "IsActive": "Yes",
+    "Invisible": "No"
+  },
+  {
+    "DepartmentId": "25",
+    "DivisionCode": "CAO",
+    "DepartmentCode": "IT",
+    "DepartmentNameEng": "INFORMATION TECHNOLOGY",
+    "DepartmentNameChi": "資訊科技部",
+    "DefaultPickupUser": "Kiyoko, Kit Hung CHAN, Una, Lai Na KWOK",
+    "IsActive": "Yes",
+    "Invisible": "No"
+  },
+  {
+    "DepartmentId": "63",
+    "DivisionCode": "CAO",
+    "DepartmentCode": "LG",
+    "DepartmentNameEng": "LEGAL",
+    "DepartmentNameChi": "法律部",
+    "DefaultPickupUser": "Kathy, Wai Fong CHEUNG, Patty, Wai Kuen MO",
+    "IsActive": "Yes",
+    "Invisible": "No"
+  },
+  {
+    "DepartmentId": "67",
+    "DivisionCode": "CAO",
+    "DepartmentCode": "OA",
+    "DepartmentNameEng": "OFFICE ADMINISTRATION",
+    "DepartmentNameChi": "行政部",
+    "DefaultPickupUser": "Anna, Siu Fong KO, Kobie, Po Ching CHEUNG, Phoebe, Y Y LI, Shirley, Ching Man AU, Shirre, Wun Yee LAU, Yedda, Wan Shan LAW",
+    "IsActive": "Yes",
+    "Invisible": "No"
+  },
+  {
+    "DepartmentId": "79",
+    "DivisionCode": "CAO",
+    "DepartmentCode": "LC",
+    "DepartmentNameEng": "CORPORATE LEGAL COUNSEL (CHINA, OVERSEAS & INVESTMENTS)",
+    "DepartmentNameChi": "法務部（中國，海外與財務投資）",
+    "DefaultPickupUser": "Brian, Kin Kwok TSE",
+    "IsActive": "Yes",
+    "Invisible": "No"
+  },
+  {
+    "DepartmentId": "93",
+    "DivisionCode": "CAO",
+    "DepartmentCode": "CAO",
+    "DepartmentNameEng": "CHIEF ADMINISTRATION OFFICE",
+    "DepartmentNameChi": "CHIEF ADMINISTRATION OFFICE",
+    "DefaultPickupUser": "Betty, Yuen Wan LAM, Thera, Mei Kuen LEUNG",
+    "IsActive": "Yes",
+    "Invisible": "No"
+  },
+  {
+    "DepartmentId": "53",
+    "DivisionCode": "CD",
+    "DepartmentCode": "CV",
+    "DepartmentNameEng": "CHINA PROPERTY",
+    "DepartmentNameChi": "中國地產處",
+    "DefaultPickupUser": "Elaine, Ying Tsz NG, Kathy, Pui Yee LEE, Michelle, Wing Yee LAM",
+    "IsActive": "Yes",
+    "Invisible": "No"
+  },
+  {
+    "DepartmentId": "52",
+    "DivisionCode": "CE",
+    "DepartmentCode": "CT",
+    "DepartmentNameEng": "CONSULTANT",
+    "DepartmentNameChi": "顧問",
+    "DefaultPickupUser": "Lisa, Lai San MA",
+    "IsActive": "Yes",
+    "Invisible": "No"
+  },
+  {
+    "DepartmentId": "58",
+    "DivisionCode": "CE",
+    "DepartmentCode": "HCO",
+    "DepartmentNameEng": "HONORARY CHAIRMAN'S OFFICE",
+    "DepartmentNameChi": "榮譽主席辦公室",
+    "DefaultPickupUser": "Alyssa, Siu Pik TSUI, Jean, Shun Kiu LAI, Michael, Kwok Fai LUN, Yoki, Kwok Yan CHAN",
+    "IsActive": "Yes",
+    "Invisible": "No"
+  },
+  {
+    "DepartmentId": "83",
+    "DivisionCode": "CE",
+    "DepartmentCode": "HR",
+    "DepartmentNameEng": "HUMAN RESOURCES",
+    "DepartmentNameChi": "人力資源部",
+    "DefaultPickupUser": "Rachel, Hoi Shan CHAN, Sally, Tsz Yan IP",
+    "IsActive": "Yes",
+    "Invisible": "No"
+  },
+  {
+    "DepartmentId": "77",
+    "DivisionCode": "CE",
+    "DepartmentCode": "VCO",
+    "DepartmentNameEng": "VICE CHAIRMAN & EXECUTIVE DIRECTOR'S OFFICE",
+    "DepartmentNameChi": "董事長及董事總經理辦公室",
+    "DefaultPickupUser": "Alyssa, Siu Pik TSUI, Jean, Shun Kiu LAI, Miuffy, Oi Shan LAM",
+    "IsActive": "Yes",
+    "Invisible": "No"
+  },
+  {
+    "DepartmentId": "89",
+    "DivisionCode": "CE",
+    "DepartmentCode": "LS",
+    "DepartmentNameEng": "HONG KONG LIFE SCIENCES SOCIETY",
+    "DepartmentNameChi": "HONG KONG LIFE SCIENCES SOCIETY",
+    "DefaultPickupUser": "Dummy User",
+    "IsActive": "Yes",
+    "Invisible": "No"
+  },
+  {
+    "DepartmentId": "49",
+    "DivisionCode": "CE",
+    "DepartmentCode": "CE",
+    "DepartmentNameEng": "GROUP CEO'S OFFICE",
+    "DepartmentNameChi": "行政總裁辦公室",
+    "DefaultPickupUser": "Elaine, Yee Lam WONG, Ida, Wai Chu WONG, Melody, Wai Ying WONG, Michelle, Man Suet HUANG, Natalie, Yan Ki CHENG, Sherman, Wing Man WONG, Vivian, Yuk Hang WONG",
+    "IsActive": "Yes",
+    "Invisible": "No"
+  },
+  {
+    "DepartmentId": "48",
+    "DivisionCode": "CE",
+    "DepartmentCode": "AD",
+    "DepartmentNameEng": "GROUP INTERNAL AUDIT",
+    "DepartmentNameChi": "集團內部審計部",
+    "DefaultPickupUser": "Fenny, Wing Yu CHEUNG, Venus, Kit Sze LEUNG",
+    "IsActive": "Yes",
+    "Invisible": "No"
+  },
+  {
+    "DepartmentId": "55",
+    "DivisionCode": "FD",
+    "DepartmentCode": "FA",
+    "DepartmentNameEng": "FINANCE & ACCOUNTS",
+    "DepartmentNameChi": "財務及會計部",
+    "DefaultPickupUser": "Amy, Si Yee TSANG, Eric, Chi Ming LO, Joyce, Hoi Ying SIN, Lisa, Lai San MA, Michael, Chun Yi WU",
+    "IsActive": "Yes",
+    "Invisible": "No"
+  },
+  {
+    "DepartmentId": "INACTIVE",
+    "DivisionCode": "FD",
+    "DepartmentCode": "FI",
+    "DepartmentNameEng": "FINANCE & INVESTMENT",
+    "DepartmentNameChi": "FINANCE & INVESTMENT",
+    "DefaultPickupUser": "Kendy, Yeuk Ka WONG, Nicky, Ka Sin HUI",
+    "IsActive": "Yes",
+    "Invisible": "No"
+  },
+  {
+    "DepartmentId": "57",
+    "DivisionCode": "FD",
+    "DepartmentCode": "GD",
+    "DepartmentNameEng": "GODOWN",
+    "DepartmentNameChi": "貨倉",
+    "DefaultPickupUser": "Dummy User",
+    "IsActive": "Yes",
+    "Invisible": "No"
+  },
+  {
+    "DepartmentId": "INACTIVE",
+    "DivisionCode": "FD",
+    "DepartmentCode": "IV",
+    "DepartmentNameEng": "INVESTMENT",
+    "DepartmentNameChi": "INVESTMENT",
+    "DefaultPickupUser": "Dummy User",
+    "IsActive": "Yes",
+    "Invisible": "No"
+  },
+  {
+    "DepartmentId": "64",
+    "DivisionCode": "FD",
+    "DepartmentCode": "MI",
+    "DepartmentNameEng": "HOUSING MORTGAGE AND INSURANCE",
+    "DepartmentNameChi": "樓宇按揭及保險部",
+    "DefaultPickupUser": "Emily, Hoi Fung AU-YEUNG, Henry, Hon Yiu SUEN",
+    "IsActive": "Yes",
+    "Invisible": "No"
+  },
+  {
+    "DepartmentId": "INACTIVE",
+    "DivisionCode": "FD",
+    "DepartmentCode": "RE",
+    "DepartmentNameEng": "INTERNATIONAL PROPERTY",
+    "DepartmentNameChi": "海外地產",
+    "DefaultPickupUser": "Ingrid, Wing Yu CHOR, Nicky, Ka Sin HUI",
+    "IsActive": "Yes",
+    "Invisible": "No"
+  },
+  {
+    "DepartmentId": "72",
+    "DivisionCode": "FD",
+    "DepartmentCode": "SH",
+    "DepartmentNameEng": "SHIPPING",
+    "DepartmentNameChi": "船務部",
+    "DefaultPickupUser": "Shirley, Ka Wai TANG",
+    "IsActive": "Yes",
+    "Invisible": "No"
+  },
+  {
+    "DepartmentId": "76",
+    "DivisionCode": "FD",
+    "DepartmentCode": "TS",
+    "DepartmentNameEng": "TREASURY",
+    "DepartmentNameChi": "資金部",
+    "DefaultPickupUser": "Shirley, Ka Wai TANG",
+    "IsActive": "Yes",
+    "Invisible": "No"
+  },
+  {
+    "DepartmentId": "97",
+    "DivisionCode": "FD",
+    "DepartmentCode": "IP",
+    "DepartmentNameEng": "INTERNATIONAL PROPERTY",
+    "DefaultPickupUser": "Ingrid, Wing Yu CHOR, Nicky, Ka Sin HUI",
+    "IsActive": "Yes",
+    "Invisible": "No"
+  },
+  {
+    "DepartmentId": "74",
+    "DivisionCode": "HP",
+    "DepartmentCode": "CN",
+    "DepartmentNameEng": "CONSTRUCTION",
+    "DepartmentNameChi": "建築部",
+    "DefaultPickupUser": "Cindy, Mei Sze LEE, Lois, Luk Yan IP",
+    "IsActive": "Yes",
+    "Invisible": "No"
+  },
+  {
+    "DepartmentId": "54",
+    "DivisionCode": "HP",
+    "DepartmentCode": "DS",
+    "DepartmentNameEng": "DESIGN",
+    "DepartmentNameChi": "設計部",
+    "DefaultPickupUser": "Elson, Chi Keung YUEN, Mandy, Wing Yan CHAN",
+    "IsActive": "Yes",
+    "Invisible": "No"
+  },
+  {
+    "DepartmentId": "INACTIVE",
+    "DivisionCode": "HP",
+    "DepartmentCode": "HKP",
+    "DepartmentNameEng": "HONG KONG PROPERTY",
+    "DepartmentNameChi": "香港地產處",
+    "DefaultPickupUser": "Joey, Yuen Kei CHEUNG, Serena, Wan Ki KO",
+    "IsActive": "Yes",
+    "Invisible": "No"
+  },
+  {
+    "DepartmentId": "INACTIVE",
+    "DivisionCode": "HP",
+    "DepartmentCode": "BV",
+    "DepartmentNameEng": "BUSINESS VALUE ADVANCEMENT",
+    "DepartmentNameChi": "業務價值推進部",
+    "DefaultPickupUser": "Dummy User",
+    "IsActive": "Yes",
+    "Invisible": "Yes"
+  },
+  {
+    "DepartmentId": "65",
+    "DivisionCode": "HP",
+    "DepartmentCode": "ML",
+    "DepartmentNameEng": "THE MILLS",
+    "DepartmentNameChi": "南豐紗廠",
+    "DefaultPickupUser": "Anna, Siu Fong KO, Kobie, Po Ching CHEUNG, Phoebe, Y Y LI, Shirley, Ching Man AU, Shirre, Wun Yee LAU, Yedda, Wan Shan LAW",
+    "IsActive": "Yes",
+    "Invisible": "No"
+  },
+  {
+    "DepartmentId": "68",
+    "DivisionCode": "HP",
+    "DepartmentCode": "PD",
+    "DepartmentNameEng": "PROPERTY DEVELOPMENT",
+    "DepartmentNameChi": "地產業務發展部",
+    "DefaultPickupUser": "Phoebe, Ka Yan TSE, Ruby, Sin Ting WONG",
+    "IsActive": "Yes",
+    "Invisible": "No"
+  },
+  {
+    "DepartmentId": "84",
+    "DivisionCode": "HP",
+    "DepartmentCode": "PJ",
+    "DepartmentNameEng": "PROJECT",
+    "DepartmentNameChi": "工程部",
+    "DefaultPickupUser": "Cindy, Mei Sze LEE, Lois, Luk Yan IP",
+    "IsActive": "Yes",
+    "Invisible": "No"
+  },
+  {
+    "DepartmentId": "70",
+    "DivisionCode": "HP",
+    "DepartmentCode": "PMT",
+    "DepartmentNameEng": "PROPERTY MANAGEMENT",
+    "DepartmentNameChi": "物業管理部",
+    "DefaultPickupUser": "Dummy User",
+    "IsActive": "Yes",
+    "Invisible": "No"
+  },
+  {
+    "DepartmentId": "73",
+    "DivisionCode": "HP",
+    "DepartmentCode": "SL",
+    "DepartmentNameEng": "ASSET MANAGEMENT",
+    "DepartmentNameChi": "資產管理部",
+    "DefaultPickupUser": "Ady, Siu Ling LO, Fei, Yuen Lan YEUNG, Florence, Lai Shan SO",
+    "IsActive": "Yes",
+    "Invisible": "No"
+  },
+  {
+    "DepartmentId": "74",
+    "DivisionCode": "HP",
+    "DepartmentCode": "SN",
+    "DepartmentNameEng": "SITE CONSTRUCTION",
+    "DepartmentNameChi": "建築部（地盤）",
+    "DefaultPickupUser": "Dummy User",
+    "IsActive": "Yes",
+    "Invisible": "No"
+  },
+  {
+    "DepartmentId": "INACTIVE",
+    "DivisionCode": "HP",
+    "DepartmentCode": "AX",
+    "DepartmentNameEng": "THE ANNEX",
+    "DepartmentNameChi": "THE ANNEX",
+    "DefaultPickupUser": "Dummy User",
+    "IsActive": "Yes",
+    "Invisible": "No"
+  },
+  {
+    "DepartmentId": "75",
+    "DivisionCode": "HP",
+    "DepartmentCode": "SP",
+    "DepartmentNameEng": "SALES",
+    "DepartmentNameChi": "銷售及市務部",
+    "DefaultPickupUser": "Alice, Suet Yin CHIU, Katharine, Kit Ying CHENG",
+    "IsActive": "Yes",
+    "Invisible": "No"
+  },
+  {
+    "DepartmentId": "91",
+    "DivisionCode": "HP",
+    "DepartmentCode": "MC",
+    "DepartmentNameEng": "MARKETING AND COMMUNICATIONS",
+    "DepartmentNameChi": "MARKETING AND COMMUNICATIONS",
+    "DefaultPickupUser": "Kammy, Kam Ping CHENG",
+    "IsActive": "Yes",
+    "Invisible": "No"
+  },
+  {
+    "DepartmentId": "94",
+    "DivisionCode": "HP",
+    "DepartmentCode": "GMDO",
+    "DepartmentNameEng": "GROUP MANAGING DIRECTOR’S OFFICE",
+    "DepartmentNameChi": "GROUP MANAGING DIRECTOR’S OFFICE",
+    "DefaultPickupUser": "Joey, Yuen Kei CHEUNG, Serena, Wan Ki KO",
+    "IsActive": "Yes",
+    "Invisible": "No"
+  },
+  {
+    "DepartmentId": "95",
+    "DivisionCode": "HP",
+    "DepartmentCode": "CCE",
+    "DepartmentNameEng": "IN TIME OF",
+    "DepartmentNameChi": "IN TIME OF",
+    "DefaultPickupUser": "Serena, Wan Ki KO",
+    "IsActive": "Yes",
+    "Invisible": "No"
+  },
+  {
+    "DepartmentId": "98",
+    "DivisionCode": "HP",
+    "DepartmentCode": "BI",
+    "DepartmentNameEng": "SEWIT",
+    "DepartmentNameChi": "SEWIT",
+    "DefaultPickupUser": "Serena, Wan Ki KO",
+    "IsActive": "Yes",
+    "Invisible": "No"
+  },
+  {
+    "DepartmentId": "66",
+    "DivisionCode": "ML6",
+    "DepartmentCode": "ML6",
+    "DepartmentNameEng": "MILL 6",
+    "DepartmentNameChi": "六廠基金會",
+    "DefaultPickupUser": "Anna, Siu Fong KO, Kobie, Po Ching CHEUNG, Phoebe, Y Y LI, Shirley, Ching Man AU, Shirre, Wun Yee LAU, Yedda, Wan Shan LAW",
+    "IsActive": "Yes",
+    "Invisible": "No"
+  },
+  {
+    "DepartmentId": "90",
+    "DivisionCode": "NTR",
+    "DepartmentCode": "NTR",
+    "DepartmentNameEng": "NF TRINITY (HK)",
+    "DepartmentNameChi": "NF TRINITY (HK)",
+    "DefaultPickupUser": "Alice, Chui Ping YAU, Michelle, Ka Wah YING, Tiffany, Ki Yan LAM, Vanessa, Ching Yi LAU",
+    "IsActive": "Yes",
+    "Invisible": "No"
+  }
+]

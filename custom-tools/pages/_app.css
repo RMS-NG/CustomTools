@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.orgchart ul {
+    display: inline-flex !important; 
+}
+
+/* .orgchart-container{
+    width: inherit;
+} */
+
+.findTableBtn {
+    background-color: rgba(127, 0, 34, 1);
+}
+
+.findTableBtn:hover {
+    background-color: rgba(127, 0, 34, 0.8);
+}
+
+.oddResult {
+    background-color: rgba(255, 226, 184, 0.9);
+}
+
+.evenResult {
+    background-color: rgba(255, 255, 255, 0.9);
+}

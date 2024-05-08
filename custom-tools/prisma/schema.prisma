@@ -1,0 +1,2114 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model temp {
+  id Int?
+
+  @@map("_temp")
+  @@ignore
+}
+
+model AnnualDeclarationForm {
+  Id                              Int                             @id(map: "PK_AnnualDeclarationForm") @default(autoincrement())
+  Year                            Int
+  ReportPotentialConflictArise    Boolean
+  SubmitPotentialConflictForm     Boolean
+  SubmittedPreviouslyAndNoChange  Boolean
+  DoNotHaveConflict               Boolean
+  Name                            String?                         @db.NVarChar(500)
+  Department                      Int
+  UPN                             String?                         @db.NVarChar(500)
+  SubmissionDate                  DateTime                        @db.DateTime
+  AnnualDeclarationFormDepartment AnnualDeclarationFormDepartment @relation(fields: [Department], references: [Id], onUpdate: NoAction, map: "FK_AnnualDeclarationForm_AnnualDeclarationForm")
+}
+
+model AnnualDeclarationFormDepartment {
+  Id                    Int                     @id(map: "PK_AnnualDeclarationFormDepartment")
+  DepartmentName        String                  @db.NVarChar(500)
+  AnnualDeclarationForm AnnualDeclarationForm[]
+}
+
+model AnnualDeclarationFormTargetAudience {
+  Id             Int     @id(map: "PK_AnnualDeclarationFormTargetAudience") @default(autoincrement())
+  UPN            String? @db.NVarChar(200)
+  Name           String? @db.NVarChar(200)
+  Year           Int?
+  Title          String?
+  DepartmentName String?
+  StaffID        String? @db.NVarChar(20)
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model AnnualDeclarationFormTargetAudience_20220512 {
+  Id             Int     @default(autoincrement())
+  UPN            String? @db.NVarChar(200)
+  Name           String? @db.NVarChar(200)
+  Year           Int?
+  Title          String?
+  DepartmentName String?
+  StaffID        String? @db.NVarChar(20)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model AnnualDeclarationFormTargetAudience_20220525 {
+  Id             Int     @default(autoincrement())
+  UPN            String? @db.NVarChar(200)
+  Name           String? @db.NVarChar(200)
+  Year           Int?
+  Title          String?
+  DepartmentName String?
+  StaffID        String? @db.NVarChar(20)
+
+  @@ignore
+}
+
+model ApplicantRequesterMapping {
+  MappingID   BigInt    @id(map: "PK_ApplicantRequesterMapping") @default(autoincrement())
+  ApplicantID String    @db.NVarChar(50)
+  RequesterID String    @db.NVarChar(50)
+  Status      Int?
+  CreatedOn   DateTime? @db.DateTime
+  CreatedBy   String?   @db.NVarChar(50)
+  ModifiedOn  DateTime? @db.DateTime
+  ModifiedBy  String?   @db.NVarChar(50)
+}
+
+model ApprovalMatrix {
+  ApprovalID        BigInt    @id(map: "PK_ApprovalMatrix") @default(autoincrement())
+  Level             Int
+  SpecialSeniorPath Int
+  isNamedStaff      Int
+  NamedStaff        String?   @db.NVarChar(50)
+  Approvers         String    @db.NVarChar(500)
+  NotifiedPerson    String?   @db.NVarChar(500)
+  FormID            Int
+  DepartmentID      BigInt?
+  StageName         String?   @db.NVarChar(50)
+  CreatedOn         DateTime? @db.DateTime
+  CreatedBy         String?   @db.NVarChar(50)
+  ModifiedOn        DateTime? @db.DateTime
+  ModifiedBy        String?   @db.NVarChar(50)
+  Status            Int?
+  Form1_ENTPath     Int?
+  Form1_BTPath      Int?
+}
+
+model Approved_Hotel {
+  ApprovalHotelID Int     @id(map: "PK_Approved_Hotel") @default(autoincrement())
+  CityID          Int?
+  HotelName       String? @db.NVarChar(Max)
+  HotelAddress    String? @db.NVarChar(Max)
+  Tel             String? @db.NVarChar(50)
+  Fax             String? @db.NVarChar(50)
+}
+
+model ApproverReplacement {
+  StaffID           String    @id(map: "PK_ApproverReplacement") @db.NVarChar(50)
+  ReplacedApprovers String    @db.NVarChar(Max)
+  Status            Int
+  CreatedOn         DateTime  @db.DateTime
+  CreatedBy         String    @db.NVarChar(50)
+  ModifiedOn        DateTime? @db.DateTime
+  ModifiedBy        String?   @db.NVarChar(50)
+}
+
+model BillTest {
+  ID    Int     @id(map: "PK_BillTest") @default(autoincrement())
+  Name  String? @db.NVarChar(50)
+  Other String? @db.NVarChar(50)
+}
+
+model BT_MealAllowanceCat {
+  BT_MealAllowanceCatID BigInt    @id(map: "PK_BT_MealAllowanceCat") @default(autoincrement())
+  NameChi               String?   @db.NVarChar(50)
+  NameEng               String?   @db.NVarChar(50)
+  CurrencyCode          String    @db.VarChar(3)
+  Allowance             Float     @db.Money
+  StatusCode            Int
+  CreatedOn             DateTime? @db.DateTime
+  CreateBy              String?   @db.NVarChar(Max)
+  ModifiedOn            DateTime? @db.DateTime
+  ModifiedBy            String?   @db.NVarChar(Max)
+}
+
+model BT_MealAllowanceStaff {
+  BT_MealAllowanceStaffID BigInt    @id(map: "PK_BT_MealAllowanceStaff") @default(autoincrement())
+  StaffID                 String    @db.NVarChar(50)
+  BT_MealAllowanceCatID   BigInt
+  Allowance               Float     @db.Money
+  StatusCode              Int?
+  CreatedOn               DateTime? @db.DateTime
+  CreatedBy               String?   @db.NVarChar(Max)
+  ModifiedOn              DateTime? @db.DateTime
+  ModifiedBy              String?   @db.NVarChar(Max)
+}
+
+model BusinessUnit {
+  BU_ID      BigInt    @id(map: "PK_BusinessUnit") @default(autoincrement())
+  NameChi    String?   @db.NVarChar(50)
+  NameEng    String?   @db.NVarChar(250)
+  StatusCode Int
+  CreatedOn  DateTime? @db.DateTime
+  CreatedBy  String?   @db.NVarChar(50)
+  ModifiedOn DateTime? @db.DateTime
+  ModifiedBy String?   @db.NVarChar(50)
+  SAP_Code   String?   @db.NVarChar(Max)
+}
+
+model C_BOOKING_GROUP_TB {
+  c_group_seq      BigInt    @id(map: "PK_C_BOOKING_GROUP_TB")
+  c_mon            String    @db.VarChar(2)
+  c_tue            String    @db.VarChar(2)
+  c_wed            String    @db.VarChar(2)
+  c_thu            String    @db.VarChar(2)
+  c_fri            String    @db.VarChar(2)
+  c_sat            String    @db.VarChar(2)
+  c_sun            String    @db.VarChar(2)
+  c_others         Int?      @db.SmallInt
+  c_holiday_flag   String    @db.VarChar(2)
+  c_from_date      DateTime  @db.DateTime
+  c_to_date        DateTime  @db.DateTime
+  c_create_prog_id String    @db.NVarChar(300)
+  c_create_user    String    @db.NVarChar(300)
+  c_create_date    DateTime  @db.DateTime
+  c_amend_prog_id  String?   @db.NVarChar(300)
+  c_amend_user     String?   @db.NVarChar(300)
+  c_amend_date     DateTime? @db.DateTime
+}
+
+model C_BOOKING_LOCATION_TB {
+  c_booking_seq    BigInt
+  c_seq            BigInt
+  c_location       String?   @db.NVarChar(300)
+  c_status         String?   @db.VarChar(2)
+  c_create_prog_id String    @db.NVarChar(300)
+  c_create_user    String    @db.NVarChar(300)
+  c_create_date    DateTime  @db.DateTime
+  c_amend_prog_id  String?   @db.NVarChar(300)
+  c_amend_user     String?   @db.NVarChar(300)
+  c_amend_date     DateTime? @db.DateTime
+  c_arrival_time   DateTime? @db.DateTime
+
+  @@id([c_booking_seq, c_seq], map: "PK_C_BOOKING_LOCATION_TB")
+}
+
+model C_BOOKING_PASSENGERS_TB {
+  c_booking_seq         BigInt
+  c_tx_seq              BigInt
+  c_comp_code           String?   @db.NVarChar(300)
+  c_dept_code           String?   @db.NVarChar(300)
+  c_sect_code           String?   @db.NVarChar(300)
+  c_passenger           String?   @db.NVarChar(300)
+  c_remarks             String?   @db.NVarChar(Max)
+  c_status              String?   @db.NVarChar(300)
+  c_amend_user          String?   @db.NVarChar(300)
+  c_create_prog_id      String?   @db.NVarChar(300)
+  c_create_user         String?   @db.NVarChar(300)
+  c_create_date         DateTime? @db.DateTime
+  c_amend_prog_id       String?   @db.NVarChar(300)
+  c_amend_date          DateTime? @db.DateTime
+  c_comp_passenger_flag String?   @db.NVarChar(300)
+  c_return_flag         String?   @db.NVarChar(300)
+
+  @@id([c_booking_seq, c_tx_seq], map: "PK_C_BOOKING_PASSENGERS_TB")
+}
+
+model C_BOOKING_TB {
+  c_booking_seq       BigInt    @id(map: "PK_C_BOOKING_TB")
+  c_booking_date      DateTime  @db.DateTime
+  c_schedule_id       BigInt?
+  c_pick_up           String?   @db.NVarChar(Max)
+  c_from_datetime     DateTime  @db.DateTime
+  c_to_datetime       DateTime  @db.DateTime
+  c_start_datetime    DateTime? @db.DateTime
+  c_complete_datetime DateTime? @db.DateTime
+  c_action_desc       String    @db.NVarChar(Max)
+  c_comp_code         String?   @db.VarChar(6)
+  c_dept_code         String?   @db.VarChar(10)
+  c_sect_code         String?   @db.VarChar(10)
+  c_applicant         String    @db.NVarChar(300)
+  c_comp_pass_cnt     Int       @db.SmallInt
+  c_others_pass_cnt   Int       @db.SmallInt
+  c_others_passengers String?   @db.NVarChar(300)
+  c_group_seq         BigInt?
+  c_remarks           String?   @db.NVarChar(Max)
+  c_status            String    @db.VarChar(2)
+  c_complete_flag     String    @db.VarChar(2)
+  c_create_prog_id    String    @db.NVarChar(300)
+  c_create_user       String    @db.NVarChar(300)
+  c_create_date       DateTime  @db.DateTime
+  c_amend_prog_id     String?   @db.NVarChar(300)
+  c_amend_user        String?   @db.NVarChar(300)
+  c_amend_date        DateTime? @db.DateTime
+  c_single_trip_flag  String?   @db.VarChar(1)
+  c_k2_id             BigInt?
+}
+
+model C_DRIVER_TB {
+  c_driver_seq      BigInt    @id(map: "PK_C_DRIVER_TB") @default(autoincrement())
+  c_driver_eng_name String?   @db.NVarChar(300)
+  c_driver_chn_name String?   @db.NVarChar(300)
+  c_driver_abbr     String?   @db.NVarChar(300)
+  c_mobile          String?   @db.NVarChar(300)
+  c_password        String?   @db.NVarChar(300)
+  c_remarks         String?   @db.NVarChar(Max)
+  c_status          String?   @db.VarChar(2)
+  c_create_prog_id  String    @db.NVarChar(300)
+  c_create_user     String    @db.NVarChar(300)
+  c_create_date     DateTime  @db.DateTime
+  c_amend_prog_id   String?   @db.NVarChar(300)
+  c_amend_user      String?   @db.NVarChar(300)
+  c_amend_date      DateTime? @db.DateTime
+  c_sort_seq        Int?
+  c_driver_username String?   @db.NVarChar(300)
+}
+
+model C_MTH_CNTL_TB {
+  c_mth            DateTime  @id(map: "PK_C_MTH_CNTL_TB") @db.DateTime
+  c_last_mth_seq   Int?
+  c_create_prog_id String    @db.NVarChar(300)
+  c_create_user    String    @db.NVarChar(300)
+  c_create_date    DateTime  @db.DateTime
+  c_amend_prog_id  String?   @db.NVarChar(300)
+  c_amend_user     String?   @db.NVarChar(300)
+  c_amend_date     DateTime? @db.DateTime
+}
+
+model C_SCHEDULE_TB {
+  c_schedule_id    BigInt    @id(map: "PK_C_SCHEDULE_TB") @default(autoincrement())
+  c_vehicle_code   String?   @db.NVarChar(300)
+  c_driver_seq     Int?
+  c_from_date      DateTime? @db.DateTime
+  c_to_date        DateTime? @db.DateTime
+  c_remarks        String?   @db.NVarChar(Max)
+  c_create_prog_id String    @db.NVarChar(300)
+  c_create_user    String    @db.NVarChar(300)
+  c_create_date    DateTime  @db.DateTime
+  c_amend_prog_id  String?   @db.NVarChar(300)
+  c_amend_user     String?   @db.NVarChar(300)
+  c_amend_date     DateTime? @db.DateTime
+}
+
+model C_VEHICLE_TB {
+  c_vehicle_code      String    @id(map: "PK_C_VEHICLE_TB") @db.VarChar(20)
+  c_vehicle_brand     String?   @db.VarChar(20)
+  c_vehicle_model     String?   @db.VarChar(20)
+  c_vehicle_seat      Int?
+  c_purchase_date     DateTime? @db.DateTime
+  c_registration_mark String?   @db.NVarChar(300)
+  c_remarks           String?   @db.NVarChar(Max)
+  c_status            String?   @db.VarChar(2)
+  c_create_prog_id    String    @db.NVarChar(300)
+  c_create_user       String    @db.NVarChar(300)
+  c_create_date       DateTime  @db.DateTime
+  c_amend_prog_id     String?   @db.NVarChar(300)
+  c_amend_user        String?   @db.NVarChar(300)
+  c_amend_date        DateTime? @db.DateTime
+}
+
+model City {
+  City      BigInt  @id(map: "PK_City") @default(autoincrement())
+  CountryID BigInt?
+  NameChi   String? @db.NVarChar(50)
+  NameEng   String? @db.NVarChar(Max)
+  MapedID   Int?
+}
+
+model CompSecEmailList {
+  ID          BigInt @id(map: "PK_CompSecEmailList") @default(autoincrement())
+  DisplayName String @db.NVarChar(100)
+  EmailList   String @db.NVarChar(Max)
+}
+
+model Country {
+  CountryID                         BigInt                              @id(map: "PK_Country") @default(autoincrement())
+  NameChi                           String?                             @db.NVarChar(50)
+  NameEng                           String?                             @db.NVarChar(Max)
+  BT_MealAllowanceCatID             BigInt?
+  MapedID                           Int?
+  NFG_BT_Application_DailyMaxAmount NFG_BT_Application_DailyMaxAmount[]
+}
+
+model Currency {
+  CurrencyID     BigInt    @id(map: "PK_Currency") @default(autoincrement())
+  CurrencyCode   String    @db.VarChar(3)
+  RelationalRate Decimal?  @db.Decimal(38, 20)
+  UpdateTime     DateTime? @db.DateTime
+}
+
+model CurrencyCode {
+  CurrencyCode String    @id(map: "PK_CurrencyCode") @db.NVarChar(3)
+  DESCRIPTION  String?   @db.NVarChar(Max)
+  Status       Int?
+  CreatedOn    DateTime? @db.DateTime
+  CreatedBy    String?   @db.NVarChar(50)
+  ForForm5     Boolean?
+  ModifiedOn   DateTime? @db.DateTime
+  ModifiedBy   String?   @db.NVarChar(50)
+}
+
+model Department {
+  DepartmentId          BigInt    @id(map: "PK_Department") @default(autoincrement())
+  NameChi               String?   @db.NVarChar(250)
+  NameEng               String?   @db.NVarChar(250)
+  StatusCode            Int?
+  CreatedOn             DateTime? @db.DateTime
+  CreatedBy             String?   @db.NVarChar(50)
+  ModifiedOn            DateTime? @db.DateTime
+  ModifiedBy            String?   @db.NVarChar(50)
+  BU_ID                 BigInt?
+  ReportBUGroup         String?   @db.NVarChar(200)
+  DefaultCostCenterCode String?   @db.NVarChar(10)
+  DelieveryAddr         String?   @db.NVarChar(Max)
+  SAP_Code              String?   @db.NVarChar(Max)
+  SAP                   Int?
+}
+
+model EffectDate {
+  EffectDateID Int       @id(map: "PK_EffectDate") @default(autoincrement())
+  StartDate    DateTime? @db.DateTime
+  EndDate      DateTime? @db.DateTime
+}
+
+model FAndBVoucherRegistrant {
+  Id                    Int                   @id(map: "PK_FBVoucher") @default(autoincrement())
+  RegistrantId          Int
+  Name                  String?               @db.NVarChar(200)
+  Email                 String?               @db.NVarChar(200)
+  SubmitterAd           String?               @db.NVarChar(200)
+  SubmissionTime        DateTime?             @db.DateTime
+  Department            String?               @db.NVarChar(200)
+  Tel                   String?               @db.NVarChar(100)
+  StaffNo               String?               @db.NVarChar(20)
+  FAndBVoucherStaffList FAndBVoucherStaffList @relation(fields: [RegistrantId], references: [Id], onUpdate: NoAction, map: "FK_FAndBVoucherRegistrant_FAndBVoucherStaffList")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model FAndBVoucherRegistrant2019 {
+  Id             Int       @default(autoincrement())
+  RegistrantId   Int
+  Name           String?   @db.NVarChar(200)
+  Email          String?   @db.NVarChar(200)
+  SubmitterAd    String?   @db.NVarChar(200)
+  SubmissionTime DateTime? @db.DateTime
+  Department     String?   @db.NVarChar(200)
+  Tel            String?   @db.NVarChar(100)
+  StaffNo        String?   @db.NVarChar(20)
+
+  @@ignore
+}
+
+model FAndBVoucherStaffList {
+  Id                     Int                      @id(map: "PK_FAndBVoucherStaffList") @default(autoincrement())
+  Name                   String                   @db.NVarChar(200)
+  Email                  String                   @db.NVarChar(200)
+  Department             String?                  @db.NVarChar(200)
+  Tel                    String?                  @db.NVarChar(100)
+  DepartmentId           Int?
+  StaffNo                String?                  @db.NVarChar(20)
+  FAndBVoucherRegistrant FAndBVoucherRegistrant[]
+}
+
+model G_HOLIDAY_TB {
+  G_HOLIDAY   DateTime @id(map: "PK_G_HOLIDAY_TB") @db.Date
+  G_HOLI_TYPE String?  @db.VarChar(2)
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model MigrateTempList {
+  StaffID String @db.NVarChar(50)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model Month {
+  Month       Int?
+  DisplayName String? @db.NVarChar(10)
+
+  @@ignore
+}
+
+model NF_AP_INTERFACE_LINES {
+  ORG_NAME                String?   @db.NVarChar(100)
+  BATCH_NAME              String?   @db.NVarChar(50)
+  INVOICE_TYPE            String?   @db.NVarChar(25)
+  VENDOR_NUMBER           String?   @db.NVarChar(240)
+  VENDOR_SITE_CODE        String?   @db.NVarChar(15)
+  INVOICE_NUM             String?   @db.NVarChar(50)
+  HEADER_DESCRIPTION      String?   @db.NVarChar(240)
+  INVOICE_DATE            DateTime? @db.DateTime
+  GL_DATE                 DateTime? @db.DateTime
+  TERMS_DATE              DateTime? @db.DateTime
+  INVOICE_CURRENCY_CODE   String?   @db.NVarChar(5)
+  CONVERSION_TYPE         String?   @db.NVarChar(40)
+  CONVERSION_DATE         DateTime? @db.DateTime
+  CONVERSION_RATE         Decimal?  @db.Decimal(38, 20)
+  PAYMENT_REASON_COMMENTS String?   @db.NVarChar(240)
+  PAY_GROUP               String?   @db.NVarChar(30)
+  REMITTANCE_MESSAGE_1    String?   @db.NVarChar(150)
+  REMITTANCE_MESSAGE_2    String?   @db.NVarChar(150)
+  REMITTANCE_MESSAGE_3    String?   @db.NVarChar(150)
+  PAYMENT_TERMS           String?   @db.NVarChar(30)
+  PAYMENT_METHOD_CODE     String?   @db.NVarChar(30)
+  ACCT_LIABILITY          String?   @db.NVarChar(240)
+  ATTRIBUTE_CATEGORY      String?   @db.NVarChar(15)
+  ATTRIBUTE1              String?   @db.NVarChar(150)
+  ATTRIBUTE2              String?   @db.NVarChar(150)
+  ATTRIBUTE3              String?   @db.NVarChar(150)
+  ATTRIBUTE4              String?   @db.NVarChar(150)
+  ATTRIBUTE5              String?   @db.NVarChar(150)
+  ATTRIBUTE6              String?   @db.NVarChar(150)
+  ATTRIBUTE7              String?   @db.NVarChar(150)
+  ATTRIBUTE8              String?   @db.NVarChar(150)
+  ATTRIBUTE9              String?   @db.NVarChar(150)
+  ATTRIBUTE10             String?   @db.NVarChar(150)
+  ATTRIBUTE11             String?   @db.NVarChar(150)
+  ATTRIBUTE12             String?   @db.NVarChar(150)
+  ATTRIBUTE13             String?   @db.NVarChar(150)
+  ATTRIBUTE14             String?   @db.NVarChar(150)
+  ATTRIBUTE15             String?   @db.NVarChar(150)
+  LINE_NUMBER             String?   @db.NVarChar(15)
+  INVOICE_LINE_AMOUNT     Decimal?  @db.Decimal(38, 20)
+  CHARGE_ACCOUNT          String?   @db.NVarChar(240)
+  LINE_DESCRIPTION        String?   @db.NVarChar(240)
+  QUANTITY                Decimal?  @db.Decimal(38, 20)
+  UOM                     String?   @db.NVarChar(30)
+  LINE_ATTRIBUTE_CATEGORY String?   @db.NVarChar(150)
+  LINE_ATTRIBUTE1         String?   @db.NVarChar(150)
+  LINE_ATTRIBUTE2         String?   @db.NVarChar(150)
+  LINE_ATTRIBUTE3         String?   @db.NVarChar(150)
+  LINE_ATTRIBUTE4         String?   @db.NVarChar(150)
+  LINE_ATTRIBUTE5         String?   @db.NVarChar(150)
+  LINE_ATTRIBUTE6         String?   @db.NVarChar(150)
+  LINE_ATTRIBUTE7         String?   @db.NVarChar(150)
+  LINE_ATTRIBUTE8         String?   @db.NVarChar(150)
+  LINE_ATTRIBUTE9         String?   @db.NVarChar(150)
+  LINE_ATTRIBUTE10        String?   @db.NVarChar(150)
+  LINE_ATTRIBUTE11        String?   @db.NVarChar(150)
+  LINE_ATTRIBUTE12        String?   @db.NVarChar(150)
+  LINE_ATTRIBUTE13        String?   @db.NVarChar(150)
+  LINE_ATTRIBUTE14        String?   @db.NVarChar(150)
+  LINE_ATTRIBUTE15        String?   @db.NVarChar(150)
+  ERROR_FLAG              String?   @db.NVarChar(1)
+  ERROR_DESC              String?   @db.NVarChar(240)
+  IMPORT_FLAG             String?   @db.NVarChar(2)
+  IMPORT_DATE             DateTime? @db.DateTime
+  REQUEST_ID              Decimal?  @db.Decimal(38, 20)
+  SOURCE_TRX_ID           String    @id(map: "PK_NF_AP_INTERFACE_LINES") @db.NVarChar(30)
+  TRX_LINE_ID             Decimal?  @db.Decimal(38, 20)
+  ORG_ID                  Decimal?  @db.Decimal(38, 20)
+  VENDOR_ID               Decimal?  @db.Decimal(38, 20)
+  VENDOR_SITE_ID          Decimal?  @db.Decimal(38, 20)
+  TERMS_ID                Decimal?  @db.Decimal(38, 20)
+  LIB_CCID                Decimal?  @db.Decimal(38, 20)
+  CHG_CCID                Decimal?  @db.Decimal(38, 20)
+  BATCH_DESCRIPTION       String?   @db.NVarChar(150)
+  BATCH_PAY_GROUP         String?   @db.NVarChar(30)
+  PREPAYMENT_TYPE         String?   @db.NVarChar(1)
+  BATCH_ATTRIBUTE2        String?   @db.NVarChar(150)
+  BATCH_ATTRIBUTE3        String?   @db.NVarChar(150)
+  BATCH_ATTRIBUTE4        String?   @db.NVarChar(150)
+  BATCH_ATTRIBUTE5        String?   @db.NVarChar(150)
+  BATCH_ATTRIBUTE6        String?   @db.NVarChar(150)
+  BATCH_ATTRIBUTE7        String?   @db.NVarChar(150)
+  BATCH_ATTRIBUTE8        String?   @db.NVarChar(150)
+  BATCH_ATTRIBUTE9        String?   @db.NVarChar(150)
+  BATCH_ATTRIBUTE10       String?   @db.NVarChar(150)
+  BATCH_ATTRIBUTE11       String?   @db.NVarChar(150)
+  BATCH_ATTRIBUTE12       String?   @db.NVarChar(150)
+  BATCH_ATTRIBUTE13       String?   @db.NVarChar(150)
+  BATCH_ATTRIBUTE14       String?   @db.NVarChar(150)
+  BATCH_ATTRIBUTE15       String?   @db.NVarChar(150)
+}
+
+model NFG_AccountRequest {
+  R_ID                 Int       @id(map: "PK_NFG_AccountRequest") @default(autoincrement())
+  Applicant            String    @db.NVarChar(200)
+  StaffStatus          String?   @db.NVarChar(50)
+  RequesterGender      String?   @db.NVarChar(10)
+  Requester            String?   @db.NVarChar(200)
+  RequesterLastName    String?   @db.NVarChar(200)
+  RequesterChi         String?   @db.NVarChar(200)
+  RequesterLastNameChi String?   @db.NVarChar(200)
+  RequesterComp        String?   @db.NVarChar(500)
+  RequesterDept        String?   @db.NVarChar(500)
+  Position             String?   @db.NVarChar(500)
+  StaffNo              String?   @db.NVarChar(50)
+  CardNo               String?   @db.NVarChar(50)
+  PhoneNo              String?   @db.NVarChar(200)
+  LockerNo             String?   @db.NVarChar(50)
+  NeedEmail            String?   @db.NVarChar(1)
+  EmailGroup           String?   @db.NVarChar(500)
+  Intranet             String?   @db.NVarChar(500)
+  NeedOn               DateTime? @db.DateTime
+  MapImage             String?   @db.NVarChar(Max)
+  EmailAdditionalLine  String?   @db.NVarChar(Max)
+  SubmitStatus         String?   @db.NVarChar(50)
+  SubmitDate           DateTime? @db.DateTime
+  CreatedOn            DateTime? @db.DateTime
+  CreatedBy            String?   @db.NVarChar(50)
+  ModifiedOn           DateTime? @db.DateTime
+  ModifiedBy           String?   @db.NVarChar(50)
+  ServiceNow_sys_id    String?   @db.NVarChar(200)
+  ServiceNow_number    String?   @db.NVarChar(200)
+}
+
+model NFG_AccountRequest_Details {
+  RD_ID          Int     @id(map: "PK_NFG_AccountRequest_Details") @default(autoincrement())
+  R_ID           Int
+  Action         String  @db.NVarChar(50)
+  Item           String  @db.NVarChar(Max)
+  PrivilegeLevel String? @db.NVarChar(500)
+  Attachment     String? @db.NVarChar(Max)
+}
+
+model NFG_AccountRequest_EmailList {
+  E_ID  Int    @id(map: "PK_NFG_AccountRequestEmailList") @default(autoincrement())
+  Email String @db.NVarChar(200)
+}
+
+model NFG_AccountRequest_Template {
+  T_ID           Int     @id(map: "PK_NFG_AccountRequest_Template") @default(autoincrement())
+  Name           String  @db.NVarChar(50)
+  Action         String  @db.NVarChar(50)
+  Item           String  @db.NVarChar(Max)
+  PrivilegeLevel String? @db.NVarChar(500)
+}
+
+model NFG_BT_Application {
+  BTApplicationID   Int       @id(map: "PK_NFG_BT_Application") @default(autoincrement())
+  RefNo             String?   @db.NVarChar(50)
+  Status            Int?
+  Requester         String?   @db.NVarChar(50)
+  FromDate          DateTime? @db.Date
+  FromAmPm          String?   @db.NVarChar(2)
+  ToDate            DateTime? @db.Date
+  ToAmPm            String?   @db.NVarChar(2)
+  TripDate          Decimal?  @db.Decimal(10, 1)
+  Category          Int?
+  Reason            String?   @db.NVarChar(Max)
+  Accompany         String?   @db.NVarChar(Max)
+  Staffacting       String?   @db.NVarChar(Max)
+  Remark            String?   @db.NVarChar(Max)
+  Urgent            Boolean?
+  insurance         String?   @db.NVarChar(50)
+  SubmitDate        DateTime? @db.DateTime
+  CreatedOn         DateTime? @db.DateTime
+  CreatedBy         String?   @db.NVarChar(50)
+  ModifiedOn        DateTime? @db.DateTime
+  ModifiedBy        String?   @db.NVarChar(50)
+  CurrentProcInstID Int?
+  StatusCode        Int       @default(1, map: "DF_NFG_BT_Application_StatusCode")
+}
+
+model NFG_BT_Application_Attachment {
+  BTApplicationAttachmentID Int       @id(map: "PK_NFG_BT_Application_Attachment") @default(autoincrement())
+  BTApplicationID           Int?
+  ApplicationFile           String?   @db.NVarChar(Max)
+  Description               String?   @db.NVarChar(Max)
+  UploadTime                DateTime? @db.DateTime
+  UploadedBy                String?   @db.NVarChar(50)
+  ModifiedOn                DateTime? @db.DateTime
+  ModifiedBy                String?   @db.NVarChar(50)
+}
+
+model NFG_BT_Application_Category {
+  BTApplicationCategoryID Int       @id(map: "PK_NFG_BT_Application_Category") @default(autoincrement())
+  Category                String?   @db.NVarChar(200)
+  Status                  Int?
+  CreatedOn               DateTime? @db.DateTime
+  CreatedBy               String?   @db.NVarChar(50)
+  ModifiedOn              DateTime? @db.DateTime
+  ModifiedBy              String?   @db.NVarChar(50)
+}
+
+model NFG_BT_Application_CostAllocation {
+  BTApplicationCAID Int       @id(map: "PK_NFG_BT_Application_CostAllocation") @default(autoincrement())
+  BTApplicationID   Int?
+  ChargeTo          Int?
+  AccountCode       String?   @db.NVarChar(50)
+  Ratio             Int?
+  Amount            Decimal?  @db.Decimal(18, 2)
+  CreatedOn         DateTime? @db.DateTime
+  CreatedBy         String?   @db.NVarChar(50)
+  ModifiedOn        DateTime? @db.DateTime
+  ModifiedBy        String?   @db.NVarChar(50)
+  StatusCode        Int?
+  isClaim           Int?
+}
+
+model NFG_BT_Application_DailyMaxAmount {
+  ID            Int      @id(map: "PK_NFG_BT_Application_DailyMaxAmount") @default(autoincrement())
+  IsGMOrAbove   Boolean
+  Currency      String   @db.NVarChar(50)
+  Amount        Decimal  @db.Decimal(18, 2)
+  EffectiveFrom DateTime @db.DateTime
+  EffectiveTo   DateTime @db.DateTime
+  CountryId     BigInt
+  Country       Country  @relation(fields: [CountryId], references: [CountryID], onUpdate: NoAction, map: "FK_NFG_BT_Application_DailyMaxAmount_Country")
+}
+
+model NFG_BT_Application_Details_Destination {
+  BTApplicationDestinationID Int       @id(map: "PK_NFG_BT_Application_Details_Destination") @default(autoincrement())
+  BTApplicationID            Int?
+  Status                     Int?
+  FromDate                   DateTime? @db.Date
+  ToDate                     DateTime? @db.Date
+  DestinationCountry         Int?
+  DestinationCity            String?   @db.NVarChar(Max)
+  Class                      Int?
+  AirlineInfo                String?   @db.NVarChar(400)
+  HotelName                  String?   @db.NVarChar(Max)
+  CreatedOn                  DateTime? @db.DateTime
+  CreatedBy                  String?   @db.NVarChar(50)
+  ModifiedOn                 DateTime? @db.DateTime
+  ModifiedBy                 String?   @db.NVarChar(50)
+}
+
+model NFG_BT_Application_Details_Destination_Temp {
+  BTApplicationDestinationID Int       @id(map: "PK_NFG_BT_Application_Details_Destination_Temp") @default(autoincrement())
+  BTApplicationID            Int?
+  Status                     Int?
+  FromDate                   DateTime? @db.Date
+  ToDate                     DateTime? @db.Date
+  DestinationCountry         Int?
+  DestinationCity            String?   @db.NVarChar(Max)
+  Class                      Int?
+  AirlineInfo                String?   @db.NVarChar(400)
+  HotelName                  String?   @db.NVarChar(Max)
+  CreatedOn                  DateTime? @db.DateTime
+  CreatedBy                  String?   @db.NVarChar(50)
+  ModifiedOn                 DateTime? @db.DateTime
+  ModifiedBy                 String?   @db.NVarChar(50)
+}
+
+model NFG_BT_MonthlyClaim_Attachment {
+  BTMonthlyClaimAttachmentID Int       @id(map: "PK_NFG_BT_MonthlyClaim_Attachment") @default(autoincrement())
+  BTMonthlyClaimID           Int?
+  AttachmentFile             String?   @db.NVarChar(Max)
+  Description                String?   @db.NVarChar(Max)
+  CreatedOn                  DateTime? @db.DateTime
+  CreatedBy                  String?   @db.NVarChar(50)
+  ModifiedOn                 DateTime? @db.DateTime
+  ModifiedBy                 String?   @db.NVarChar(50)
+  BTApplicationID            Int?
+  BTMonthlyClaimDetailsID    Int?
+}
+
+model NFG_BT_MonthlyClaim_CostAllocation {
+  BTMonthlyClaimCAID Int       @id(map: "PK_NFG_BT_MonthlyClaim_CostAllocation") @default(autoincrement())
+  BTMonthlyClaimID   Int?
+  BTApplicationID    Int?
+  ChargeTo           Int?
+  AccountCode        String?   @db.NVarChar(50)
+  Ratio              Int?
+  Amount             Decimal?  @db.Decimal(18, 2)
+  CreatedOn          DateTime? @db.DateTime
+  CreatedBy          String?   @db.NVarChar(50)
+  ModifiedOn         DateTime? @db.DateTime
+  ModifiedBy         String?   @db.NVarChar(50)
+  StatusCode         Int?
+  isClaim            Int?
+}
+
+model NFG_BT_MonthlyClaim_Endorsement {
+  BTEndorsementID  Int       @id(map: "PK_NFG_BT_MonthlyClaim_Endorsement") @default(autoincrement())
+  BTMonthlyClaimID Int?
+  AttachmentFile   String?   @db.NVarChar(Max)
+  Supporting       Int?
+  Description      String?   @db.NVarChar(Max)
+  CreatedOn        DateTime? @db.DateTime
+  CreatedBy        String?   @db.NVarChar(50)
+  ModifiedOn       DateTime? @db.DateTime
+  ModifiedBy       String?   @db.NVarChar(50)
+}
+
+model NFG_BT_MonthlyClaim_Endorsement_Category {
+  SupportingID Int       @id(map: "PK_NFG_BT_MonthlyClaim_Endorsement_Category") @default(autoincrement())
+  Name         String?   @db.NVarChar(50)
+  Status       Int?
+  CreatedOn    DateTime? @db.DateTime
+  CreatedBy    String?   @db.NVarChar(50)
+  ModifiedOn   DateTime? @db.DateTime
+  ModifiedBy   String?   @db.NVarChar(50)
+}
+
+model NFG_BT_MonthlyClaim_Ent_Attachment {
+  BTMonthlyClaimEntAttachmentID Int       @id(map: "PK_NFG_BT_MonthlyClaim_Ent_Attachment") @default(autoincrement())
+  BTMonthlyClaimID              Int?
+  AttachmentFile                String?   @db.NVarChar(Max)
+  Description                   String?   @db.NVarChar(Max)
+  CreatedOn                     DateTime? @db.DateTime
+  CreatedBy                     String?   @db.NVarChar(50)
+  ModifiedOn                    DateTime? @db.DateTime
+  ModifiedBy                    String?   @db.NVarChar(50)
+}
+
+model NFG_BT_MonthlyClaim_Ent_Details {
+  BTMonthlyEnTClaimID          Int                           @id(map: "PK_NFG_BT_MonthlyClaim_Ent_Details") @default(autoincrement())
+  BTMonthlyClaimID             Int?
+  Approve                      Int?
+  ClaimTo                      Int?
+  SiteCost                     Int?
+  AccompanyWith                String?                       @db.NVarChar(Max)
+  TransactionDate              DateTime?                     @db.Date
+  Description                  String?                       @db.NVarChar(Max)
+  Venue                        String?                       @db.NVarChar(200)
+  CompanyDetail                String?                       @db.NVarChar(200)
+  GuestName                    String?                       @db.NVarChar(100)
+  TotalPerson                  Int?
+  useCorpRate                  Int?
+  Currency                     String?                       @db.NChar(3)
+  OriginalCurrencyAmount       Decimal?                      @db.Decimal(18, 2)
+  ExchangeRate                 Decimal?                      @db.Decimal(10, 4)
+  HKDAmount                    Decimal?                      @db.Decimal(18, 2)
+  ClaimAmount                  Decimal?                      @db.Decimal(18, 2)
+  FAEditedClaimAmount          Int?
+  AttachmentNumber             String?                       @db.NVarChar(50)
+  ClaimByStaff                 Int?
+  ClaimByCorpCard              Int?
+  Status                       Int?
+  CreatedOn                    DateTime?                     @db.DateTime
+  CreatedBy                    String?                       @db.NVarChar(50)
+  ModifiedOn                   DateTime?                     @db.DateTime
+  ModifiedBy                   String?                       @db.NVarChar(50)
+  BTSummaryBatchID             Int?
+  RemarksForFA                 String?                       @db.NVarChar(Max)
+  RejectedByCEO                String?                       @db.NVarChar(3)
+  RemarksForCEO                String?                       @db.NVarChar(Max)
+  RemarksForApplicant          String?                       @db.NVarChar(Max)
+  Auto                         Int?
+  TotalPolicyCapAmount         Decimal?                      @db.Decimal(18, 2)
+  EntType                      Int?
+  IsCEOCOOPreApproved          Boolean?
+  NFG_BT_MonthlyClaim_Ent_Type NFG_BT_MonthlyClaim_Ent_Type? @relation(fields: [EntType], references: [EntTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_NFG_BT_MonthlyClaim_Ent_Details_NFG_BT_MonthlyClaim_Ent_Type")
+}
+
+model NFG_BT_MonthlyClaim_Ent_Details_Temp {
+  BTMonthlyEnTClaimID          Int                           @id(map: "PK_NFG_BT_MonthlyClaim_Ent_Details_Temp") @default(autoincrement())
+  BTMonthlyClaimID             Int?
+  Approve                      Int?
+  ClaimTo                      Int?
+  SiteCost                     Int?
+  AccompanyWith                String?                       @db.NVarChar(Max)
+  TransactionDate              DateTime?                     @db.Date
+  Description                  String?                       @db.NVarChar(Max)
+  Venue                        String?                       @db.NVarChar(200)
+  CompanyDetail                String?                       @db.NVarChar(200)
+  GuestName                    String?                       @db.NVarChar(100)
+  TotalPerson                  Int?
+  Currency                     String?                       @db.NChar(3)
+  OriginalCurrencyAmount       Decimal?                      @db.Decimal(18, 2)
+  ExchangeRate                 Decimal?                      @db.Decimal(10, 4)
+  HKDAmount                    Decimal?                      @db.Decimal(18, 2)
+  ClaimAmount                  Decimal?                      @db.Decimal(18, 2)
+  FAEditedClaimAmount          Int?
+  AttachmentNumber             String?                       @db.NVarChar(50)
+  ClaimByStaff                 Int?
+  ClaimByCorpCard              Int?
+  Status                       Int?
+  CreatedOn                    DateTime?                     @db.DateTime
+  CreatedBy                    String?                       @db.NVarChar(50)
+  ModifiedOn                   DateTime?                     @db.DateTime
+  ModifiedBy                   String?                       @db.NVarChar(50)
+  BTSummaryBatchID             Int?
+  RemarksForFA                 String?                       @db.NVarChar(Max)
+  RemarksForCEO                String?                       @db.NVarChar(Max)
+  RemarksForApplicant          String?                       @db.NVarChar(Max)
+  useCorpRate                  Int?
+  Auto                         Int?
+  TotalPolicyCapAmount         Decimal?                      @db.Decimal(18, 2)
+  EntType                      Int?
+  IsCEOCOOPreApproved          Boolean?
+  NFG_BT_MonthlyClaim_Ent_Type NFG_BT_MonthlyClaim_Ent_Type? @relation(fields: [EntType], references: [EntTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_NFG_BT_MonthlyClaim_Ent_Details_Temp_NFG_BT_MonthlyClaim_Ent_Type")
+}
+
+model NFG_BT_MonthlyClaim_Ent_PolicyCapAmount {
+  BTMonthlyEnTPolicyCapID Int      @id(map: "PK_NFG_BT_MonthlyClaim_Ent_PolicyCapAmount") @default(autoincrement())
+  CapAmount               Decimal  @db.Decimal(18, 0)
+  EffectiveFrom           DateTime @db.DateTime
+  EffectiveTo             DateTime @db.DateTime
+}
+
+model NFG_BT_MonthlyClaim_Ent_Type {
+  EntTypeId                            Int                                    @id(map: "PK_NFG_BT_MonthlyClaim_Ent_Type")
+  Type                                 String?                                @db.NVarChar(50)
+  NFG_BT_MonthlyClaim_Ent_Details      NFG_BT_MonthlyClaim_Ent_Details[]
+  NFG_BT_MonthlyClaim_Ent_Details_Temp NFG_BT_MonthlyClaim_Ent_Details_Temp[]
+}
+
+model NFG_BT_MonthlyClaim_ExcludeTE_Details {
+  BTMonthlyClaimDetailsID         Int       @id(map: "PK_NFG_BT_MonlyClaim_ExcludeTE_Details") @default(autoincrement())
+  BTMonthlyClaimID                Int?
+  BTApplicationID                 Int?
+  Approve                         Int?
+  ClaimTo                         Int?
+  ClaimType                       Int?
+  SiteCost                        Int?
+  AccompanyWith                   String?   @db.NVarChar(Max)
+  TransactionDate                 DateTime? @db.Date
+  Description                     String?   @db.NVarChar(Max)
+  Currency                        String?   @db.NChar(3)
+  OriginalCurrencyAmount          Decimal?  @db.Decimal(18, 2)
+  ExchangeRate                    Decimal?  @db.Decimal(10, 4)
+  HKDAmount                       Decimal?  @db.Decimal(18, 2)
+  ClaimAmount                     Decimal?  @db.Decimal(18, 2)
+  FAEditedClaimAmount             Int?
+  AttachmentNumber                String?   @db.NVarChar(50)
+  ClaimByStaff                    Int?
+  ClaimByCorpCard                 Int?
+  MobileAttachmentNumber          Int?
+  Status                          Int?
+  CreatedOn                       DateTime? @db.DateTime
+  CreatedBy                       String?   @db.NVarChar(50)
+  ModifiedOn                      DateTime? @db.DateTime
+  ModifiedBy                      String?   @db.NVarChar(50)
+  FARemark                        String?   @db.NVarChar(Max)
+  useCorpRate                     Int?
+  Auto                            Int?
+  PolicyMaxCurrencyAmount         Decimal?  @db.Decimal(18, 2)
+  PolicyMaxCurrency               String?   @db.NChar(10)
+  OriginalCurrencyClaimableAmount Decimal?  @db.Decimal(18, 2)
+  NumOfRoom                       Int?
+  NumOfNight                      Int?
+  PolicyMaxHKDAmount              Decimal?  @db.Decimal(18, 2)
+  PolicyMaxAmountExchangeRate     Decimal?  @db.Decimal(10, 4)
+  TripCountry                     Int?
+  PolicyMaxAmountTotal            Decimal?  @db.Decimal(10, 4)
+  IsCEOCOOPreApproved             Boolean?
+}
+
+model NFG_BT_MonthlyClaim_ExcludeTE_Details_Temp {
+  BTMonthlyClaimDetailsID        Int       @id(map: "PK_NFG_BT_MonlyClaim_ExcludeTE_Details_Temp") @default(autoincrement())
+  BTMonthlyClaimID               Int?
+  BTApplicationID                Int?
+  Approve                        Int?
+  ClaimTo                        Int?
+  ClaimType                      Int?
+  SiteCost                       Int?
+  AccompanyWith                  String?   @db.NVarChar(Max)
+  TransactionDate                DateTime? @db.Date
+  Description                    String?   @db.NVarChar(Max)
+  Currency                       String?   @db.NChar(3)
+  OriginalCurrencyAmount         Decimal?  @db.Decimal(18, 2)
+  ExchangeRate                   Decimal?  @db.Decimal(10, 4)
+  HKDAmount                      Decimal?  @db.Decimal(18, 2)
+  ClaimAmount                    Decimal?  @db.Decimal(18, 2)
+  FAEditedClaimAmount            Int?
+  AttachmentNumber               String?   @db.NVarChar(50)
+  ClaimByStaff                   Int?
+  ClaimByCorpCard                Int?
+  MobileAttachmentNumber         Int?
+  Status                         Int?
+  CreatedOn                      DateTime? @db.DateTime
+  CreatedBy                      String?   @db.NVarChar(50)
+  ModifiedOn                     DateTime? @db.DateTime
+  ModifiedBy                     String?   @db.NVarChar(50)
+  FARemark                       String?   @db.NVarChar(Max)
+  useCorpRate                    Int?
+  Auto                           Int?
+  PolicyMaxCurrencyAmount        Decimal?  @db.Decimal(18, 2)
+  PolicyMaxCurrency              String?   @db.NChar(3)
+  NumOfRoom                      Int?
+  NumOfNight                     Int?
+  PolicyMaxHKDAmount             Decimal?  @db.Decimal(18, 2)
+  PolicyMaxAmountPerNightPerRoom Decimal?  @db.Decimal(10, 4)
+  PolicyMaxAmountTotal           Decimal?  @db.Decimal(10, 4)
+  TotalClaimableAmountHKD        Decimal?  @db.Decimal(10, 4)
+  TotalClaimableAmount           Decimal?  @db.Decimal(10, 4)
+  TripCountry                    Int?
+  PolicyMaxCurrencyAmountDisplay String?   @db.NVarChar(50)
+  PolicyMaxAmountExchangeRate    Decimal?  @db.Decimal(10, 4)
+  IsCEOCOOPreApproved            Boolean?
+}
+
+model NFG_BT_MonthlyClaim_ExTE_ApplicationList {
+  ClaimApplicationID Int       @id(map: "PK_NFG_BT_MonlyClaim_ExTE_ApplicationList") @default(autoincrement())
+  BTMonthlyClaimID   Int?
+  ApplicationID      Int?
+  TripDateFrom       DateTime? @db.Date
+  TripDateEnd        DateTime? @db.Date
+  Destination        String?   @db.NVarChar(100)
+  Reason             String?   @db.NVarChar(Max)
+  Duration           Decimal?  @db.Decimal(10, 2)
+  CreatedOn          DateTime? @db.DateTime
+  CreatedBy          String?   @db.NVarChar(50)
+  RemarksForFA       String?   @db.NVarChar(Max)
+  RejectedBy         String?   @db.NVarChar(3)
+  RemarksForCEO      String?   @db.NVarChar(Max)
+  SiteCost           Boolean?
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model NFG_BT_MonthlyClaim_ExTE_ClaimType {
+  ClaimTypeID Int?
+  ClaimType   String?   @db.NVarChar(50)
+  CreatedOn   DateTime? @db.DateTime
+  CreatedBy   String?   @db.NVarChar(50)
+  ModifiedOn  DateTime? @db.DateTime
+  ModifiedBy  String?   @db.NVarChar(50)
+
+  @@ignore
+}
+
+model NFG_BT_MonthlyClaim_MealAllowance_Breakdown {
+  ID                      BigInt   @id(map: "PK_NFG_BT_MonthlyClaim_MealAllowance_Breakdown") @default(autoincrement())
+  BTMonthlyClaimDetailsID Int
+  StaffID                 String   @db.NVarChar(50)
+  HKDAmount               Decimal  @db.Decimal(18, 2)
+  ModifiedOn              DateTime @db.DateTime
+  isCorpCard              Int?
+}
+
+model NFG_BT_MontlyClaim_ExcludeTE_Form {
+  BTMonthlyClaimID   Int       @id(map: "PK_NFG_BT_MontlyClaim_ExcludeTE_Form") @default(autoincrement())
+  Month              Int?
+  Year               Int?
+  Status             Int?
+  Requester          String?   @db.NVarChar(50)
+  Applicant          String?   @db.NVarChar(50)
+  SubmitTime         DateTime? @db.DateTime
+  CreatedOn          DateTime? @db.DateTime
+  CreatedBy          String?   @db.NVarChar(50)
+  ModifiedOn         DateTime? @db.DateTime
+  ModifiedBy         String?   @db.NVarChar(50)
+  Department         String?   @db.NVarChar(200)
+  BU                 String?   @db.NVarChar(200)
+  CurrentProcInstID  Int?
+  BTSummaryBatchID   BigInt?
+  CostCenterID       Int?
+  IsRequesterGMAbove Boolean?
+}
+
+model NFG_BT_SummaryMonthly_BTexpenses {
+  SumOfMonthlyBTExpensesID Int       @id(map: "PK_NFG_BT_SummaryMonthly_BTexpenses")
+  Month                    Int?
+  Year                     Int?
+  CostCentre               String?   @db.NVarChar(50)
+  StaffNumber              String?   @db.NVarChar(50)
+  Staffname                String?   @db.NVarChar(50)
+  PrePaidTravel            Float?    @db.Money
+  PrePaidHotel             Float?    @db.Money
+  ClaimedTicket            Float?    @db.Money
+  ClaimedHotel             Float?    @db.Money
+  ClaimedOthers            Float?    @db.Money
+  TotalTripExpenses        Float?    @db.Money
+  SubtotalbyStaff          Float?    @db.Money
+  Destination              String?   @db.NVarChar(50)
+  TripPurpose              String?   @db.NVarChar(Max)
+  TripDuration             Decimal?  @db.Decimal(10, 2)
+  CreatedOn                DateTime? @db.DateTime
+  CreatedBy                String?   @db.NVarChar(50)
+  ModifiedOn               DateTime? @db.DateTime
+  ModifiedBy               String?   @db.NVarChar(50)
+  SubmitDate               DateTime? @db.Date
+}
+
+model NFG_BT_SummaryMonthly_ExportSAP {
+  ID         BigInt   @id(map: "PK_NFG_BT_SummaryMonthly_ExportSAP") @default(autoincrement())
+  BatchId    BigInt
+  TypeId     String   @db.NVarChar(50)
+  Currency   String   @db.NVarChar(5)
+  ReportFile String?  @db.NVarChar(Max)
+  ExportDate DateTime @db.DateTime
+}
+
+model NFG_BT_SummaryMonthlyBatch {
+  BTSummaryBatchID  BigInt    @id(map: "PK_NFG_BT_SummaryMonthlyBatch") @default(autoincrement())
+  Month             Int
+  Year              Int
+  Status            Int?
+  CreatedOn         DateTime? @db.DateTime
+  CreatedBy         String?   @db.NVarChar(50)
+  ModifiedOn        DateTime? @db.DateTime
+  ModifiedBy        String?   @db.NVarChar(50)
+  BTBatchRef        String?   @db.NVarChar(50)
+  EntBatchRef       String?   @db.NVarChar(50)
+  CurrentProcInstID Int?
+  BTApprovalDate    DateTime? @db.DateTime
+  BTApprovedAttach  String?   @db.NVarChar(Max)
+  EntApprovalDate   DateTime? @db.DateTime
+  EntApprovedAttach String?   @db.NVarChar(Max)
+  isExport          Int?
+  ExportTemp        String?   @db.NVarChar(Max)
+  BTExportTime      DateTime? @db.DateTime
+  EntExportTime     DateTime? @db.DateTime
+  isProcessing      Int?
+}
+
+model NFG_CashFlowCategory {
+  CashFlowCatID BigInt    @id(map: "PK_NFG_CashFlowCategory") @default(autoincrement())
+  Name          String    @db.NVarChar(50)
+  Nature        String    @db.NVarChar(Max)
+  CreatedOn     DateTime? @db.DateTime
+  CreatedBy     String?   @db.NVarChar(50)
+  ModifiedOn    DateTime? @db.DateTime
+  ModifiedBy    String?   @db.NVarChar(50)
+  Status        Int?
+  PRSSMappingID BigInt?
+}
+
+model NFG_ChargeTo {
+  ChargeToID Int       @id(map: "PK_NFG_ChargeTo") @default(autoincrement())
+  Type       String?   @db.NVarChar(50)
+  CreatedOn  DateTime? @db.DateTime
+  CreatedBy  String?   @db.NVarChar(50)
+  ModifiedOn DateTime? @db.DateTime
+  ModifiedBy String?   @db.NVarChar(50)
+  Status     Int?
+}
+
+model NFG_CNP_Staff {
+  StaffID    String    @id(map: "PK_NFG_CNP_Staff") @db.NVarChar(50)
+  Status     Int
+  CreatedOn  DateTime? @db.DateTime
+  CreatedBy  String?   @db.NVarChar(50)
+  ModifiedOn DateTime? @db.DateTime
+  ModifiedBy String?   @db.NVarChar(50)
+}
+
+model NFG_Company {
+  CompanyID     BigInt    @id(map: "PK_NFG_Company")
+  Code          String?   @db.NVarChar(50)
+  Name          String?   @db.NVarChar(200)
+  CreatedOn     DateTime? @db.DateTime
+  CreatedBy     String?   @db.NVarChar(50)
+  ModifiedOn    DateTime? @db.DateTime
+  ModifiedBy    String?   @db.NVarChar(50)
+  Status        Int?
+  PRSSMappingID BigInt?
+}
+
+model NFG_CompanyVehicleReservation_Application {
+  ApplicationID           Int       @id(map: "PK_NFG_CompanyVehicleReservation_Application") @default(autoincrement())
+  RefNo                   String?   @db.NVarChar(50)
+  Status                  Int?
+  RegisterDate            DateTime? @db.DateTime
+  Requester               String?   @db.NVarChar(50)
+  ReserveDate             DateTime? @db.Date
+  EditReserveDate         DateTime? @db.Date
+  ReserveTimeFrom         DateTime? @db.Time
+  EditReserveTimeFrom     DateTime? @db.Time
+  ReserveTimeTo           DateTime? @db.Time
+  EditReserveTimeTo       DateTime? @db.Time
+  Driver                  String?   @db.NVarChar(50)
+  Vehicle                 String?   @db.NVarChar(20)
+  ScheduleID              Int?
+  StartLocation           String?   @db.NVarChar(50)
+  SingleOrRound           Int?
+  ReturnTime              DateTime? @db.Time
+  RegularReservation      Boolean?
+  RegularReservationStart DateTime? @db.Date
+  RegularReservationEnd   DateTime? @db.Date
+  Monday                  Boolean?
+  Tuesday                 Boolean?
+  Wednesday               Boolean?
+  Thursday                Boolean?
+  Friday                  Boolean?
+  Saturday                Boolean?
+  Sunday                  Boolean?
+  IncludePublicHoliday    Boolean?
+  CompletedDate           DateTime? @db.DateTime
+  Remarks                 String?   @db.NVarChar(Max)
+  CreatedOn               DateTime? @db.DateTime
+  CreatedBy               String?   @db.NVarChar(50)
+  ModifiedOn              DateTime? @db.DateTime
+  ModifiedBy              String?   @db.NVarChar(50)
+  CurrentProcInstID       Int?
+  Oracle_Group_Seq        Decimal?  @db.Decimal(10, 0)
+  StatusCode              Int?
+}
+
+model NFG_CompanyVehicleReservation_Application_CompanyPassengerDetails {
+  PassengerInfoID   Int       @id(map: "PK_NFG_CompanyVehicleReservation_Application_CompanyPassengerDetails") @default(autoincrement())
+  ApplicationID     Int?
+  DepartureOrReturn Int?
+  Colleague         Boolean?
+  Status            Int?
+  Department        Int?
+  ColleagueName     String?   @db.NVarChar(50)
+  NonColleagueName  String?   @db.NVarChar(50)
+  Remarks           String?   @db.NVarChar(Max)
+  CreatedOn         DateTime? @db.DateTime
+  CreatedBy         String?   @db.NVarChar(50)
+  ModifiedOn        DateTime? @db.DateTime
+  ModifiedBy        String?   @db.NVarChar(50)
+}
+
+model NFG_CompanyVehicleReservation_Application_Location {
+  LocationID     Int       @id(map: "PK_NFG_CompanyVehicleReservation_Application_Location") @default(autoincrement())
+  Order          Int?
+  Status         Int?
+  ApplicationID  Int?
+  Site           Int?
+  Location       String?   @db.NVarChar(Max)
+  StartTime      DateTime? @db.Time
+  ArriveTime     DateTime? @db.Time
+  Attachment     String?   @db.NVarChar(Max)
+  CreatedOn      DateTime? @db.DateTime
+  CreatedBy      String?   @db.NVarChar(50)
+  ModifiedOn     DateTime? @db.DateTime
+  ModifiedBy     String?   @db.NVarChar(50)
+  EditArriveTime DateTime? @db.Time
+}
+
+model NFG_CompanyVehicleReservation_ExceptionDates {
+  ExceptionID   Int       @id(map: "PK_NFG_CompanyVehicleReservation_ExceptionDates") @default(autoincrement())
+  ApplicationID Int?
+  ExceptionDate DateTime? @db.Date
+  Status        Int?
+  CreatedOn     DateTime? @db.DateTime
+  CreatedBy     String?   @db.NVarChar(50)
+  ModifiedOn    DateTime? @db.DateTime
+  ModifiedBy    String?   @db.NVarChar(50)
+}
+
+model NFG_CostCenter {
+  CostCenterID        BigInt    @id(map: "PK_NFG_CostCenter")
+  Code                String    @db.NVarChar(10)
+  Description         String    @db.NVarChar(100)
+  CreatedOn           DateTime? @db.DateTime
+  CreatedBy           String?   @db.NVarChar(50)
+  ModifiedOn          DateTime? @db.DateTime
+  ModifiedBy          String?   @db.NVarChar(50)
+  Status              Int?
+  PRSSMappingID       BigInt?
+  DefaultPayGroupName String?   @db.NVarChar(200)
+}
+
+model NFG_EBS_Invoice_Temp {
+  ID                    Int       @id(map: "PK_NFG_EBS_Invoice_Temp") @unique(map: "unique_ID") @default(autoincrement())
+  SummaryBatchID        Int?
+  ORG_NAME              String    @db.VarChar(100)
+  BATCH_NAME            String    @db.VarChar(250)
+  INVOICE_TYPE          String    @db.VarChar(25)
+  VENDOR_NUMBER         String    @db.VarChar(240)
+  VENDOR_SITE_CODE      String    @db.VarChar(15)
+  INVOICE_NUM           String    @db.VarChar(50)
+  HEADER_DESCRIPTION    String    @db.NVarChar(240)
+  INVOICE_DATE          DateTime  @db.DateTime
+  GL_DATE               DateTime  @db.DateTime
+  TERMS_DATE            DateTime  @db.DateTime
+  INVOICE_CURRENCY_CODE String    @db.VarChar(5)
+  CONVERSION_TYPE       String?   @db.VarChar(40)
+  CONVERSION_DATE       DateTime? @db.DateTime
+  CONVERSION_RATE       Decimal?  @db.Decimal(38, 20)
+  PAY_GROUP             String    @db.VarChar(30)
+  REMITTANCE_MESSAGE_1  String?   @db.NVarChar(150)
+  PAYMENT_TERMS         String    @db.VarChar(30)
+  PAYMENT_METHOD_CODE   String    @db.VarChar(30)
+  ACCT_LIABILITY        String    @db.VarChar(240)
+  ATTRIBUTE2            String    @db.VarChar(150)
+  ATTRIBUTE4            String    @default("K2WORKFLOW", map: "DF__NFG_EBS_I__ATTRI__5555A4F4") @db.VarChar(150)
+  ATTRIBUTE5            String    @db.VarChar(150)
+  LINE_NUMBER           String    @db.VarChar(15)
+  INVOICE_LINE_AMOUNT   Float     @db.Money
+  CHARGE_ACCOUNT        String    @db.VarChar(240)
+  SOURCE_TRX_ID         String    @db.VarChar(30)
+  BATCH_PAY_GROUP       String    @db.VarChar(30)
+  IMPORT_FLAG           String?   @db.NChar(10)
+  ERROR_FLAG            String?   @db.VarChar(1)
+  ERROR_DESC            String?   @db.VarChar(240)
+  IMPORT_DATE           DateTime? @db.DateTime
+  CreatedOn             DateTime? @default(now(), map: "DF_NFG_EBS_Invoice_Temp_CreatedOn") @db.DateTime
+  BATCH_DESCRIPTION     String?   @db.NVarChar(150)
+  BATCH_ATTRIBUTE2      String?   @db.NVarChar(150)
+  BATCH_ATTRIBUTE3      String?   @db.NVarChar(150)
+  BATCH_ATTRIBUTE4      String?   @db.NVarChar(150)
+  BATCH_ATTRIBUTE5      String?   @db.NVarChar(150)
+  BATCH_ATTRIBUTE6      String?   @db.NVarChar(150)
+  BATCH_ATTRIBUTE7      String?   @db.NVarChar(150)
+  BATCH_ATTRIBUTE8      String?   @db.NVarChar(150)
+  FormID                Int?
+  EntityID              Int?
+  EntityID2             Int?
+  EntityID3             String?   @db.NVarChar(50)
+}
+
+model NFG_Email_Exclude {
+  StaffID    String    @id(map: "PK_NFG_Email_Exclude") @db.NVarChar(50)
+  Status     Int?
+  CreatedOn  DateTime? @db.DateTime
+  CreatedBy  String?   @db.NVarChar(50)
+  ModifiedOn DateTime? @db.DateTime
+  ModifiedBy String?   @db.NVarChar(50)
+}
+
+model NFG_Form {
+  FormID      Int       @id(map: "PK_NFG_Form") @default(autoincrement())
+  FormType    Int?
+  FormSubType Int?
+  FormName    String?   @db.NVarChar(Max)
+  FormUrl     String?   @db.NVarChar(Max)
+  CreatedOn   DateTime? @db.DateTime
+  CreatedBy   String?   @db.NVarChar(50)
+  ModifiedOn  DateTime? @db.DateTime
+  ModifiedBy  String?   @db.NVarChar(50)
+  Status      Int?
+}
+
+model NFG_Form_ApprovalHistory {
+  HistoryID         BigInt   @id(map: "PK_NFG_Form_ApprovalHistory") @default(autoincrement())
+  Approver          String   @db.NVarChar(50)
+  Action            String   @db.NVarChar(50)
+  CreatedOn         DateTime @db.DateTime
+  ApplicationID     Int
+  ApplicationRef    String?  @default("N'N/A'", map: "DF_NFG_Form_ApprovalHistory_ApplicationRef") @db.NVarChar(50)
+  FormID            Int
+  Department        String?  @db.NVarChar(50)
+  BU                String?  @db.NVarChar(50)
+  StageName         String   @db.NVarChar(50)
+  ProcessInstanceID Int?
+  ProcessName       String?  @db.NVarChar(50)
+  Remarks           String?  @db.NVarChar(Max)
+}
+
+model NFG_Form_Role_List {
+  FormRoleID BigInt    @id(map: "PK_NFG_Form_Role_List") @default(autoincrement())
+  FormID     Int
+  RoleName   String    @db.NVarChar(50)
+  Status     Int?
+  CreatedOn  DateTime? @db.DateTime
+  CreatedBy  String?   @db.NVarChar(50)
+  ModifiedOn DateTime? @db.DateTime
+  ModifiedBy String?   @db.NVarChar(50)
+}
+
+model NFG_Form_Role_Staff {
+  RecordID   BigInt    @id(map: "PK_NFG_Form_Role_Staff") @default(autoincrement())
+  FormRoleID BigInt
+  StaffID    String    @db.NVarChar(50)
+  Status     Int?
+  CreatedOn  DateTime? @db.DateTime
+  CreatedBy  String?   @db.NVarChar(50)
+  ModifiedOn DateTime? @db.DateTime
+  ModifiedBy String?   @db.NVarChar(50)
+}
+
+model NFG_FormSubType {
+  FormSubType     Int       @id(map: "PK_NFG_FormSubType") @default(autoincrement())
+  FormSubTypeName String?   @db.NVarChar(Max)
+  CreatedOn       DateTime? @db.DateTime
+  CreatedBy       String?   @db.NVarChar(50)
+  ModifiedOn      DateTime? @db.DateTime
+  ModifiedBy      String?   @db.NVarChar(50)
+  Status          Int?
+}
+
+model NFG_FormType {
+  FormType     Int       @id(map: "PK_NFG_FormType") @default(autoincrement())
+  FormTypeName String?   @db.NVarChar(Max)
+  CreatedOn    DateTime? @db.DateTime
+  CreatedBy    String?   @db.NVarChar(50)
+  ModifiedOn   DateTime? @db.DateTime
+  ModifiedBy   String?   @db.NVarChar(50)
+  Status       Int?
+}
+
+model NFG_GrantedStaffList {
+  ID         Int       @id(map: "PK_NFG_GrantedStaffList") @default(autoincrement())
+  StaffID    String?   @db.NVarChar(50)
+  FormID     Int?
+  isVIP      Int?
+  Status     Int?
+  CreatedOn  DateTime? @db.DateTime
+  CreatedBy  String?   @db.NVarChar(50)
+  ModifiedOn DateTime? @db.DateTime
+  ModifiedBy String?   @db.NVarChar(50)
+}
+
+model NFG_HR_insurance {
+  InsuranceID Int    @id(map: "PK_NFG_HR_insurance") @default(autoincrement())
+  FileContent String @db.NVarChar(Max)
+}
+
+model NFG_HR_OT_Claim_Detail {
+  ECID                  Int       @id(map: "PK_NFG_HR_OT_Claim_Detail") @default(autoincrement())
+  ClaimHeaderECID       Int
+  ClaimDate             DateTime? @db.Date
+  ConstantOTFrom        DateTime? @db.Time
+  ConstantOTTo          DateTime? @db.Time
+  ConstantOTDuration    Decimal?  @db.Decimal(18, 2)
+  NonConstantOTFrom     DateTime? @db.Time
+  NonConstantOTTo       DateTime? @db.Time
+  NonConstantOTDuration Decimal?  @db.Decimal(18, 2)
+  ClaimReason           String?   @db.NVarChar(500)
+  MealAmt               Decimal?  @db.Decimal(18, 2)
+  HRMealAmt             Decimal?  @db.Decimal(18, 2)
+  TransAmt              Decimal?  @db.Decimal(18, 2)
+  HRTransAmt            Decimal?  @db.Decimal(18, 2)
+}
+
+model NFG_HR_OT_Claim_H {
+  ECID                   Int       @id(map: "PK_NFG_HR_OT_Claim_H") @default(autoincrement())
+  RequesterDept          String?   @db.NVarChar(100)
+  RequesterName          String?   @db.NVarChar(100)
+  EmployeeName           String?   @db.NVarChar(100)
+  EmployeeDept           String?   @db.NVarChar(100)
+  EmployeeNum            String?   @db.NVarChar(10)
+  ConstantOTHour         Decimal?  @db.Decimal(18, 2)
+  ConstantOTAmt          Decimal?  @db.Decimal(18, 2)
+  NonConstantOTHour      Decimal?  @db.Decimal(18, 2)
+  NonConstantOTAmt       Decimal?  @db.Decimal(18, 2)
+  MealWithReceiptAmt     Decimal?  @db.Decimal(18, 2)
+  MealWithoutReceiptAmt  Decimal?  @db.Decimal(18, 2)
+  TransWithReceiptAmt    Decimal?  @db.Decimal(18, 2)
+  TransWithoutReceiptAmt Decimal?  @db.Decimal(18, 2)
+  TotalAmt               Decimal?  @db.Decimal(18, 2)
+  SubmitDate             DateTime? @db.DateTime
+  CreatedOn              DateTime? @db.DateTime
+  CreatedBy              String?   @db.NVarChar(50)
+  ModifiedOn             DateTime? @db.DateTime
+  ModifiedBy             String?   @db.NVarChar(50)
+  Attachment_ID          Int?
+  Status                 String?   @db.NVarChar(10)
+}
+
+model NFG_INS_ContRiskEmplComp {
+  ECID                           Int       @id(map: "PK_NFG_INS_ContRiskEmplComp") @default(autoincrement())
+  NameOfInsured                  String?   @db.NVarChar(500)
+  ContractSum                    Decimal?  @db.Decimal(18, 2)
+  WorkLocation                   String?   @db.NVarChar(500)
+  WorkNature                     String?   @db.NVarChar(500)
+  InteriorWork                   String?   @db.NVarChar(5)
+  ExteriorWork                   String?   @db.NVarChar(5)
+  WorkOverThirtyFeetGround       String?   @db.NVarChar(5)
+  ScaffoldingWork                String?   @db.NVarChar(5)
+  ErectionDismantlingScaffolding String?   @db.NVarChar(5)
+  GondolaWork                    String?   @db.NVarChar(5)
+  InsuranceStartFrom             DateTime? @db.DateTime
+  InsuranceEndTo                 DateTime? @db.DateTime
+  MaintenancePeriodFrom          DateTime? @db.DateTime
+  MaintenancePeriodTo            DateTime? @db.DateTime
+  SupplementaryInfo              String?   @db.NVarChar(Max)
+  RequesterName                  String?   @db.NVarChar(500)
+  RequesterDept                  String?   @db.NVarChar(500)
+  SubmitDate                     DateTime? @db.DateTime
+  CreatedOn                      DateTime? @db.DateTime
+  CreatedBy                      String?   @db.NVarChar(50)
+  ModifiedOn                     DateTime? @db.DateTime
+  ModifiedBy                     String?   @db.NVarChar(50)
+  TO                             String?   @db.NVarChar(2000)
+  CC                             String?   @db.NVarChar(2000)
+  BCC                            String?   @db.NVarChar(2000)
+  Attachment_ID                  Int?
+  InsuranceType                  String?   @db.NVarChar(100)
+}
+
+model NFG_INS_ContRiskEmplComp_Attachment {
+  ID         Int     @id(map: "PK_NFG_INS_ContRiskEmplComp_Attachment") @default(autoincrement())
+  Attachment String? @db.NVarChar(Max)
+}
+
+model NFG_INS_Email {
+  EMAILPK Int     @id(map: "PK_NFG_INS_Email")
+  TO      String  @db.NVarChar(2000)
+  CC      String? @db.NVarChar(2000)
+  BCC     String? @db.NVarChar(2000)
+}
+
+model NFG_INS_EmployeeCompensatoin {
+  ECID                Int       @id(map: "PK_NFG_INS_EmployeeCompensatoin") @default(autoincrement())
+  NameOfInsured       String?   @db.NVarChar(500)
+  BusinessAddress     String?   @db.NVarChar(2000)
+  BusinessNature      String?   @db.NVarChar(500)
+  InsuranceStartFrom  DateTime? @db.DateTime
+  InsuranceEndTo      DateTime? @db.DateTime
+  WorkerNum           Int?
+  WorkerEarnings      Decimal?  @db.Decimal(18, 2)
+  AllWorkerNum        Int?
+  AllWorkerEarnings   Decimal?  @db.Decimal(18, 2)
+  OtherWorkerNature   String?
+  OtherWorkerNum      Int?
+  OtherWorkerEarnings Decimal?  @db.Decimal(18, 2)
+  SupplementaryInfo   String?   @db.NVarChar(Max)
+  RequesterName       String?   @db.NVarChar(500)
+  RequesterDept       String?   @db.NVarChar(500)
+  SubmitDate          DateTime? @db.DateTime
+  CreatedOn           DateTime? @db.DateTime
+  CreatedBy           String?   @db.NVarChar(50)
+  ModifiedOn          DateTime? @db.DateTime
+  ModifiedBy          String?   @db.NVarChar(50)
+  TO                  String?   @db.NVarChar(2000)
+  CC                  String?   @db.NVarChar(2000)
+  BCC                 String?   @db.NVarChar(2000)
+}
+
+model NFG_INS_PropAllRiskPubLiability {
+  PARPLID            Int       @id(map: "PK_NFG_INS_PropAllRiskPubLiability") @default(autoincrement())
+  InsurType          String?   @db.NVarChar(500)
+  NameOfInsured      String?   @db.NVarChar(500)
+  SituationOfRisk    String?   @db.NVarChar(2000)
+  Occupation         String?   @db.NVarChar(500)
+  GrossFloorArea     Decimal?  @db.Decimal(18, 2)
+  NameOfMortgagee    String?   @db.NVarChar(500)
+  InsuranceStartFrom DateTime? @db.DateTime
+  InsuranceEndTo     DateTime? @db.DateTime
+  OnBuildingSum      Decimal?  @db.Decimal(18, 2)
+  OnFurnitureSum     Decimal?  @db.Decimal(18, 2)
+  OnStockInTradeSum  Decimal?  @db.Decimal(18, 2)
+  OnMachinerySum     Decimal?  @db.Decimal(18, 2)
+  OnLossMonth        Int?
+  OnLossSum          Decimal?  @db.Decimal(18, 2)
+  OthersNature       String?
+  OthersSum          Decimal?  @db.Decimal(18, 2)
+  SupplementaryInfo  String?   @db.NVarChar(Max)
+  RequesterName      String?   @db.NVarChar(500)
+  RequesterDept      String?   @db.NVarChar(500)
+  SubmitDate         DateTime? @db.DateTime
+  CreatedOn          DateTime? @db.DateTime
+  CreatedBy          String?   @db.NVarChar(50)
+  ModifiedOn         DateTime? @db.DateTime
+  ModifiedBy         String?   @db.NVarChar(50)
+  TO                 String?   @db.NVarChar(2000)
+  CC                 String?   @db.NVarChar(2000)
+  BCC                String?   @db.NVarChar(2000)
+}
+
+model NFG_LifeScience_BT_ImportBatch {
+  Id                            Int                             @id(map: "PK_NFG_LifeScience_BT_ImportBatch") @default(autoincrement())
+  CreatedBy                     String?                         @db.NVarChar(50)
+  CreateDate                    DateTime                        @db.DateTime
+  UploadedFilePath              String?
+  OutputFilePath                String?
+  NFG_LifeScience_BT_ImportFile NFG_LifeScience_BT_ImportFile[]
+}
+
+model NFG_LifeScience_BT_ImportFile {
+  Id                               Int                            @id(map: "PK_NFG_LifeScience_BT_ImportFile") @default(autoincrement())
+  StaffName                        String?                        @db.NVarChar(300)
+  NFG_LifeScience_BT_ImportBatchId Int
+  TripID                           Int?
+  ForBizTrip                       Boolean?
+  ForEntClaim                      Boolean?
+  Requester                        String?                        @db.NVarChar(50)
+  TripDestination                  String?                        @db.NVarChar(200)
+  TripPurpose                      String?                        @db.NVarChar(50)
+  PaidByStaff                      Boolean?
+  FromDate                         DateTime?                      @db.Date
+  FromAmPm                         String?                        @db.NVarChar(2)
+  ToDate                           DateTime?                      @db.Date
+  ToAmPm                           String?                        @db.NVarChar(2)
+  TripDate                         Decimal?                       @db.Decimal(10, 1)
+  ExpensifyDate                    DateTime?                      @db.Date
+  ExpensifyVendor                  String?                        @db.NVarChar(500)
+  ExpensifyAmount                  Decimal?                       @db.Decimal(18, 2)
+  ExpensifyCategory                String?                        @db.NVarChar(100)
+  ExpensifyDescription             String?                        @db.NVarChar(500)
+  ExpensifyAttendees               String?                        @db.NVarChar(300)
+  ExpensifyCurrency                String?                        @db.NVarChar(5)
+  TripExpenseType                  String?                        @db.NVarChar(50)
+  Venu                             String?                        @db.NVarChar(50)
+  GuestCompany                     String?                        @db.NVarChar(200)
+  GuestName                        String?                        @db.NVarChar(200)
+  AccompanyWith                    String?                        @db.NVarChar(200)
+  TotalPerson                      Int?
+  NFG_LifeScience_BT_ImportBatch   NFG_LifeScience_BT_ImportBatch @relation(fields: [NFG_LifeScience_BT_ImportBatchId], references: [Id], onUpdate: NoAction, map: "FK_NFG_LifeScience_BT_ImportFile_NFG_LifeScience_BT_ImportBatch")
+}
+
+model NFG_LifeScience_UserAccessList {
+  Id     Int    @id(map: "PK_NFG_LifeScience_UserAccessList") @default(autoincrement())
+  userId String @db.NVarChar(50)
+}
+
+model NFG_MonthlyClaim_Summary_Report {
+  SummaryID      Int       @id(map: "PK_NFG_MonthlyClaim_Summary_Report") @default(autoincrement())
+  MonthlyClaimID Int?
+  Summary        String?   @db.NVarChar(Max)
+  Uploaddate     DateTime? @db.Date
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model NFG_OverseasStaff {
+  StaffID      String    @db.NVarChar(50)
+  CountryID    Int
+  CurrencyCode String?   @db.VarChar(3)
+  Status       Int
+  CreatedOn    DateTime? @db.DateTime
+  CreatedBy    String?   @db.NVarChar(50)
+  ModifiedOn   DateTime? @db.DateTime
+  ModifiedBy   String?   @db.NVarChar(50)
+
+  @@ignore
+}
+
+model NFG_PayGroup {
+  PayGroupID    BigInt    @id(map: "PK_NFG_PayGroup") @default(autoincrement())
+  NameEng       String?   @db.NVarChar(200)
+  NameChi       String?   @db.NVarChar(Max)
+  CreatedOn     DateTime? @db.DateTime
+  CreatedBy     String?   @db.NVarChar(50)
+  ModifiedOn    DateTime? @db.DateTime
+  ModifiedBy    String?   @db.NVarChar(50)
+  Status        Int?
+  PRSSMappingID BigInt?
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model NFG_PurchaseRequisition_Category1 {
+  Category1ID  Int?
+  CategoryName String?   @db.NVarChar(100)
+  Group        Int?
+  Status       Int?
+  CreatedOn    DateTime? @db.DateTime
+  CreatedBy    String?   @db.NVarChar(50)
+  ModifiedOn   DateTime? @db.DateTime
+  ModifiedBy   String?   @db.NVarChar(50)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model NFG_PurchaseRequisition_Category2 {
+  Category2ID   Int?
+  Category1ID   Int?
+  Category2Name String?   @db.NVarChar(100)
+  Status        Int?
+  CreatedOn     DateTime? @db.DateTime
+  CreatedBy     String?   @db.NVarChar(50)
+  ModifiedOn    DateTime? @db.DateTime
+  ModifiedBy    String?   @db.NVarChar(50)
+
+  @@ignore
+}
+
+model NFG_PurchaseRequisition_PO {
+  POID       Int       @id(map: "PK_NFG_PurchaseRequisiton_PO") @default(autoincrement())
+  PONo       String?   @db.NVarChar(50)
+  Status     Int?
+  Amount     Decimal?  @db.Decimal(18, 2)
+  CreatedOn  DateTime? @db.DateTime
+  CreatedBy  String?   @db.NVarChar(50)
+  ModifiedOn DateTime? @db.DateTime
+  ModifiedBy String?   @db.NVarChar(50)
+}
+
+model NFG_PurchaseRequisition_PO_Delivery_Details {
+  DeliveryID   Int       @id(map: "PK_NFG_PurchaseRequisition_PO_Delivery_Details") @default(autoincrement())
+  PONo         String?   @db.NVarChar(50)
+  DeliveryDate DateTime? @db.Date
+  Attachment   String?   @db.NVarChar(Max)
+  Status       Int?
+  CreatedOn    DateTime? @db.DateTime
+  CreatedBy    String?   @db.NVarChar(50)
+  ModifiedOn   DateTime? @db.DateTime
+  ModifiedBy   String?   @db.NVarChar(50)
+}
+
+model NFG_PurchaseRequisition_PO_Invoice_Details {
+  InvoiceID   Int       @id(map: "PK_NFG_PurchaseRequisition_PO_Invoice_Details") @default(autoincrement())
+  PONo        String?   @db.NVarChar(50)
+  InvoiceNo   String?   @db.NVarChar(50)
+  Amount      Decimal?  @db.Decimal(18, 2)
+  invoiceDate DateTime? @db.Date
+  Attachment  String?   @db.NVarChar(Max)
+  Status      Int?
+  CreatedOn   DateTime? @db.DateTime
+  CreatedBy   String?   @db.NVarChar(50)
+  ModifiedOn  DateTime? @db.DateTime
+  ModifiedBy  String?   @db.NVarChar(50)
+}
+
+model NFG_PurchaseRequisition_PR_Application {
+  ApplicationID       Int       @id(map: "PK_NFG_PurchaseRequistion_PR_Application") @default(autoincrement())
+  Status              Int?
+  OAOrIT              String?   @db.NVarChar(2)
+  PRNo                String?   @db.NVarChar(50)
+  SubmitDate          DateTime? @db.DateTime
+  Requester           String?   @db.NVarChar(50)
+  RequesterDepartment Int?
+  CompanyUse          Boolean?
+  Remarks             String?   @db.NVarChar(Max)
+  Attachment          String?   @db.NVarChar(Max)
+  Urgent              Boolean?
+  CreatedOn           DateTime? @db.DateTime
+  CreatedBy           String?   @db.NVarChar(50)
+  ModifiedOn          DateTime? @db.DateTime
+  ModifiedBy          String?   @db.NVarChar(50)
+  CurrentProInstID    Int?
+}
+
+model NFG_PurchaseRequisition_PR_Attachment {
+  ID          Int       @id(map: "PK_NFG_PurchaseRequisition_PR_Attachment") @default(autoincrement())
+  PRID        Int?
+  Attachment  String?   @db.NVarChar(Max)
+  Description String?   @db.NVarChar(Max)
+  Status      Int?
+  CreatedOn   DateTime? @db.DateTime
+  CreatedBy   String?   @db.NVarChar(50)
+  ModifiedOn  DateTime? @db.DateTime
+  ModifiedBy  String?   @db.NVarChar(50)
+}
+
+model NFG_PurchaseRequisition_PR_EndUser {
+  EndUserID         Int       @id(map: "PK_NFG_PurchaseRequisition_PR_EndUser") @default(autoincrement())
+  ApplicaitonID     Int?
+  Status            Int?
+  PlainText         Boolean?
+  UserName          String?   @db.NVarChar(50)
+  PlainTextUserName String?   @db.NVarChar(100)
+  UserDepartment    Int?
+  CreatedOn         DateTime? @db.DateTime
+  CreatedBy         String?   @db.NVarChar(50)
+  ModifiedOn        DateTime? @db.DateTime
+  ModifiedBy        String?   @db.NVarChar(50)
+}
+
+model NFG_PurchaseRequisition_PR_Item {
+  ItemID        Int       @id(map: "PK_NFG_PurchaseRequisition_PR_Item") @default(autoincrement())
+  ApplicationID Int?
+  Status        Int?
+  Category1     Int?
+  Category2     Int?
+  Description   String?   @db.NVarChar(Max)
+  Quantity      Int?
+  Unit          String?   @db.NVarChar(10)
+  CreatedOn     DateTime? @db.DateTime
+  CreatedBy     String?   @db.NVarChar(50)
+  ModifiedOn    DateTime? @db.DateTime
+  ModifiedBy    String?   @db.NVarChar(50)
+}
+
+model NFG_PurchaseRequisition_Quotation_Details {
+  QuoteID       Int       @id(map: "PK_NFG_PurchaseReservation_Quotation_Details") @default(autoincrement())
+  ApplicaitonID Int?
+  Status        Int?
+  Category1     Int?
+  Category2     Int?
+  Description   String?   @db.NVarChar(Max)
+  Quantity      Int?
+  Unit          String?   @db.NVarChar(10)
+  Vendor        String?   @db.NVarChar(100)
+  PONumber      String?   @db.NVarChar(50)
+  Amount        Decimal?  @db.Decimal(18, 2)
+  Remarks       String?   @db.NVarChar(Max)
+  CreatedOn     DateTime? @db.DateTime
+  CreatedBy     String?   @db.NVarChar(50)
+  ModifiedOn    DateTime? @db.DateTime
+  ModifiedBy    String?   @db.NVarChar(50)
+}
+
+model NFG_PurchaseRequisition_Quotation_Vendor {
+  VendorSelectionID Int       @id(map: "PK_NFG_PurchaseReaservation_Quotation_Vendor") @default(autoincrement())
+  QuoteID           Int?
+  Status            Int?
+  Existing          Boolean?
+  VendorName        String?   @db.NVarChar(100)
+  VendorAmount      Decimal?  @db.Decimal(18, 2)
+  Attachment        String?   @db.NVarChar(Max)
+  Selected          Boolean?
+  CreatedOn         DateTime? @db.DateTime
+  CreatedBy         String?   @db.NVarChar(50)
+  ModifiedOn        DateTime? @db.DateTime
+  ModifiedBy        String?   @db.NVarChar(50)
+}
+
+model NFG_Site {
+  ID          Int       @id(map: "PK_NFG_Site") @default(autoincrement())
+  Region      String?   @db.NVarChar(50)
+  SiteName    String?   @db.NVarChar(50)
+  SiteAddress String?   @db.NVarChar(Max)
+  isVIP       Int?
+  CreatedOn   DateTime? @db.DateTime
+  CreatedBy   String?   @db.NVarChar(50)
+  ModifiedOn  DateTime? @db.DateTime
+  ModifiedBy  String?   @db.NVarChar(50)
+}
+
+model NFG_STAFFOTHERNAME {
+  ID             Int     @id(map: "PK_NFG_STAFFOTHERNAME") @default(autoincrement())
+  StaffID        String? @db.NVarChar(50)
+  DisplayNameEng String? @db.NVarChar(100)
+}
+
+model NFG_Stationery_Application_Admin_Form {
+  SummaryPurchaseID Int       @id(map: "PK_NFG_Stationery_Application_Admin_Form") @default(autoincrement())
+  Status            Int?
+  Year              Int?
+  Month             Int?
+  Count             Int?
+  InvoiceChecked    Boolean?
+  InvoiceCheckedBy  String?   @db.NVarChar(Max)
+  invoiceNumber     String?   @db.NVarChar(50)
+  invoiceAmount     Decimal?  @db.Decimal(18, 2)
+  DeliveryNoteFile  String?   @db.NVarChar(Max)
+  SubmitDate        DateTime? @db.DateTime
+  CreatedOn         DateTime? @db.DateTime
+  CreatedBy         String?   @db.NVarChar(50)
+  ModifiedOn        DateTime? @db.DateTime
+  ModifiedBy        String?   @db.NVarChar(50)
+  CurrentProcInstID Int?
+}
+
+model NFG_Stationery_Application_Department_Form {
+  PurchaseID        Int       @id(map: "PK_NFG_Stationery_Application_Department_Form") @default(autoincrement())
+  Status            Int?
+  SummaryID         Int?
+  Department        Int?
+  SubmitDate        DateTime? @db.DateTime
+  InvoiceNumber     String?   @db.NVarChar(50)
+  InvoiceDate       DateTime? @db.Date
+  Notes             String?   @db.NVarChar(Max)
+  DueDate           DateTime? @db.DateTime
+  CreatedOn         DateTime? @db.DateTime
+  CreatedBy         String?   @db.NVarChar(50)
+  ModifiedOn        DateTime? @db.DateTime
+  ModifiedBy        String?   @db.NVarChar(50)
+  Remarks           String?   @db.NVarChar(Max)
+  FARemarks         String?   @db.NVarChar(Max)
+  CurrentProcInstID Int?
+  ApprovalDate      DateTime? @db.Date
+  EBS_ID            Int?
+}
+
+model NFG_Stationery_Application_Form {
+  StationeryApplicationID Int       @id(map: "PK_NFG_Stationery_Application_Form") @default(autoincrement())
+  Status                  Int?
+  PurchaseID              Int?
+  SubmitDate              DateTime? @db.DateTime
+  Department              Int?
+  Amount                  Decimal?  @db.Decimal(18, 2)
+  Requester               String?   @db.NVarChar(50)
+  CreatedOn               DateTime? @db.DateTime
+  CreatedBy               String?   @db.NVarChar(50)
+  ModifiedOn              DateTime? @db.DateTime
+  ModifiedBy              String?   @db.NVarChar(50)
+}
+
+model NFG_Stationery_DeptAssistant {
+  DepartmentAssistantID BigInt    @id(map: "PK_NFG_Stationery_DeptAssistant") @default(autoincrement())
+  StaffID               String    @db.NVarChar(50)
+  DepartmentID          Int
+  Status                Int?
+  CreatedOn             DateTime? @db.DateTime
+  CreatedBy             String?   @db.NVarChar(50)
+  ModifiedOn            DateTime? @db.DateTime
+  ModifiedBy            String?   @db.NVarChar(50)
+}
+
+model NFG_Stationery_Model {
+  ModelID       Int       @id(map: "PK_NFG_Stationery_Model") @default(autoincrement())
+  StationeryID  Int?
+  ModelName     String?   @db.NVarChar(200)
+  Price         Decimal?  @db.Decimal(18, 2)
+  EffectiveDate DateTime? @db.Date
+  Status        Int?
+  CreatedOn     DateTime? @db.DateTime
+  CreatedBy     String?   @db.NVarChar(50)
+  ModifiedOn    DateTime? @db.DateTime
+  ModifiedBy    String?   @db.NVarChar(50)
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model NFG_Stationery_Model_20210331 {
+  ModelID       Int       @default(autoincrement())
+  StationeryID  Int?
+  ModelName     String?   @db.NVarChar(200)
+  Price         Decimal?  @db.Decimal(18, 2)
+  EffectiveDate DateTime? @db.Date
+  Status        Int?
+  CreatedOn     DateTime? @db.DateTime
+  CreatedBy     String?   @db.NVarChar(50)
+  ModifiedOn    DateTime? @db.DateTime
+  ModifiedBy    String?   @db.NVarChar(50)
+
+  @@ignore
+}
+
+model NFG_Stationery_Request {
+  RequestItemID           Int       @id(map: "PK_NFG_Stationery_Request") @default(autoincrement())
+  StationeryApplicationID Int?
+  Requester               String?   @db.NVarChar(50)
+  Status                  Int?
+  Category                Int?
+  StationeryID            Int?
+  Model                   Int?
+  Qty                     Int?
+  SubmitDate              DateTime? @db.DateTime
+  Received                DateTime? @db.Date
+  Department              Int?
+  Remarks                 String?   @db.NVarChar(Max)
+  CreatedOn               DateTime? @db.DateTime
+  CreatedBy               String?   @db.NVarChar(50)
+  ModifiedOn              DateTime? @db.DateTime
+  ModifiedBy              String?   @db.NVarChar(50)
+}
+
+model NFG_Stationery_Request_Header {
+  HeaderID     Int       @id(map: "PK_NFG_Stationery_Request_Header") @default(autoincrement())
+  SummaryId    Int?
+  Departmentid Int?
+  PurchaseID   Int?
+  Status       Int?
+  Category     Int?
+  StationeryID Int?
+  Model        Int?
+  Qty          Decimal?  @db.Decimal(18, 1)
+  Price        Decimal?  @db.Decimal(10, 2)
+  EditPrice    Decimal?  @db.Decimal(18, 2)
+  Remarks      String?   @db.NVarChar(Max)
+  CreatedOn    DateTime? @db.DateTime
+  CreatedBy    String?   @db.NVarChar(50)
+  ModifiedOn   DateTime? @db.DateTime
+  ModifiedBy   String?   @db.NVarChar(50)
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model NFG_Stationery_SubmissionAmount {
+  LimitAmount Float @db.Money
+
+  @@ignore
+}
+
+model NFG_Stationery_Supplier {
+  VendorID             Int     @id(map: "PK_NFG_Stationery_Supplier")
+  PartySiteID          Int?
+  SupplierContact      String? @db.NVarChar(80)
+  SupplierContactPhone String? @db.NVarChar(25)
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model NFG_Status {
+  StatusID      Int?
+  Name          String? @db.NVarChar(50)
+  isRecalAmount Int?
+  Remarks       String? @db.NVarChar(Max)
+
+  @@ignore
+}
+
+model NFG_Supplier {
+  SupplierID BigInt    @id(map: "PK_NFG_Supplier") @default(autoincrement())
+  NameEng    String?   @db.NVarChar(100)
+  NameChi    String?   @db.NVarChar(50)
+  Address    String?   @db.NVarChar(Max)
+  CreatedOn  DateTime? @db.DateTime
+  CreatedBy  String?   @db.NVarChar(50)
+  ModifiedOn DateTime? @db.DateTime
+  ModifiedBy String?   @db.NVarChar(50)
+  Status     Int?
+  Workflow   String?   @db.NVarChar(50)
+  Email      String?   @db.NVarChar(Max)
+  EmailCc    String?   @db.NVarChar(Max)
+}
+
+model NFG_SupplierSite {
+  SupplierSiteID BigInt    @id(map: "PK_NFG_SupplierSite") @default(autoincrement())
+  NameEng        String?   @db.NVarChar(200)
+  NameChi        String?   @db.NVarChar(50)
+  SupplierID     BigInt
+  CreatedOn      DateTime? @db.DateTime
+  CreatedBy      String?   @db.NVarChar(50)
+  ModifiedOn     DateTime? @db.DateTime
+  ModifiedBy     String?   @db.NVarChar(50)
+  Status         Int?
+  PRSSMappingID  BigInt?
+}
+
+model NFG_Transportation {
+  TransportationID   Int       @id(map: "PK_NFG_Transportation") @default(autoincrement())
+  TransportationName String?   @db.NVarChar(50)
+  CreatedOn          DateTime? @db.DateTime
+  CreatedBy          String?   @db.NVarChar(50)
+  ModifiedOn         DateTime? @db.DateTime
+  ModifiedBy         String?   @db.NVarChar(50)
+  Status             Int?
+}
+
+model NFG_Transportation_Class {
+  TransportationClassID Int       @id(map: "PK_NFG_Transportation_Class") @default(autoincrement())
+  Name                  String?   @db.NVarChar(50)
+  CreatedOn             DateTime? @db.DateTime
+  CreatedBy             String?   @db.NVarChar(50)
+  ModifiedOn            DateTime? @db.DateTime
+  ModifiedBy            String?   @db.NVarChar(50)
+  Status                Int?
+}
+
+model NFG_Vehicle {
+  ID              Int       @id(map: "PK_NFG_Vehicle") @default(autoincrement())
+  Status          Int?
+  LicensePlate    String?   @db.NVarChar(20)
+  PassengerNumber Int?
+  VechicleBrand   String?   @db.NVarChar(50)
+  Model           String?   @db.NVarChar(50)
+  CreatedOn       DateTime? @db.DateTime
+  CreatedBy       String?   @db.NVarChar(50)
+  ModifiedOn      DateTime? @db.DateTime
+  ModifiedBy      String?   @db.NVarChar(50)
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model NFG_WhiteList {
+  StaffID    String?   @db.NVarChar(50)
+  Status     Int?
+  CreatedOn  DateTime? @db.DateTime
+  CreatedBy  String?   @db.NVarChar(50)
+  ModifiedOn DateTime? @db.DateTime
+  ModifiedBy String?   @db.NVarChar(50)
+
+  @@ignore
+}
+
+model PMT_DDL {
+  DDLID    Int    @id(map: "PK_PMT_DDL") @default(autoincrement())
+  Category String @db.NVarChar(50)
+  Display  String @db.NVarChar(100)
+  Value    String @db.NVarChar(100)
+  Sorting  Int?
+}
+
+model PMT_FollowUp_Mstr {
+  FollowUpID  Int       @id(map: "PK_PMT_FollowUp_Mstr") @default(autoincrement())
+  FormID      Int?
+  Property    String?
+  Description String    @db.NVarChar(Max)
+  Cause       String?   @db.NVarChar(100)
+  Category    String?   @db.NVarChar(100)
+  Defect      String?   @db.NVarChar(100)
+  Severtiy    String?   @db.NVarChar(50)
+  Location    String?   @db.NVarChar(50)
+  Remarks     String?   @db.NVarChar(Max)
+  Status      String?   @db.NVarChar(50)
+  CreatedOn   DateTime? @db.DateTime
+  CreatedBy   String?   @db.NVarChar(50)
+  ModifiedOn  DateTime? @db.DateTime
+  ModifiedBy  String?   @db.NVarChar(50)
+}
+
+model PMT_Form_Mstr {
+  FormID          Int       @id(map: "PK_PMT_Form_Mstr") @default(autoincrement())
+  Property        String
+  ReceiveDateTime DateTime  @db.DateTime
+  ReceiveMethod   String    @db.NVarChar(50)
+  IssueType       String?   @db.NVarChar(50)
+  CustomerRole    String    @db.NVarChar(50)
+  CustomerName    String?   @db.NVarChar(500)
+  CustomerTel     String?   @db.NVarChar(50)
+  CustomerEmail   String?   @db.NVarChar(200)
+  Description     String?   @db.NVarChar(Max)
+  CreatedOn       DateTime? @db.DateTime
+  CreatedBy       String?   @db.NVarChar(50)
+  ModifiedOn      DateTime? @db.DateTime
+  ModifiedBy      String?   @db.NVarChar(50)
+}
+
+model Ricky_test_2 {
+  ID      Int    @id(map: "PK_Ricky_test_2") @default(autoincrement())
+  name    String @db.NVarChar(50)
+  staffno Int?
+}
+
+model RickyTest {
+  ID      Int     @id(map: "PK_RickyTest") @default(autoincrement())
+  Name    String? @db.NVarChar(500)
+  Address String? @db.NVarChar(500)
+}
+
+model SAP_Dept_ExcludeList {
+  Id       Int    @id(map: "PK_SAP_Dept_ExcludeList") @default(autoincrement())
+  DeptCode String @db.NVarChar(Max)
+  TeamCode String @db.NVarChar(Max)
+  Status   Int
+}
+
+model SequenceTableStorage {
+  SequenceId    BigInt   @id(map: "PK_SequenceTableStorage") @default(autoincrement())
+  SequenceDate  DateTime @db.Date
+  Form          String   @db.NVarChar(20)
+  ApplicationID Int
+}
+
+model StaffJobMapping {
+  StaffID           String    @id(map: "PK_StaffJobMapping_1") @db.NVarChar(50)
+  BUID              BigInt?
+  DepartmentID      BigInt?
+  CostCenter        String?   @db.NVarChar(Max)
+  StaffNo           String?   @db.NVarChar(10)
+  PayeeName         String?   @db.NVarChar(100)
+  DisplayNameChi    String?   @db.NVarChar(50)
+  DisplayNameEng    String?   @db.NVarChar(100)
+  isVIP             Int?
+  isYearlyInsurance Int?
+  Company           String?   @db.NVarChar(Max)
+  StatusCode        Int?
+  CreatedOn         DateTime? @db.DateTime
+  CreatedBy         String?   @db.NVarChar(50)
+  ModifiedOn        DateTime? @db.DateTime
+  ModifiedBy        String?   @db.NVarChar(50)
+  PayGroup          String?   @db.NVarChar(Max)
+  LangProfile       String?   @db.NVarChar(10)
+  isHQ              Int?
+  isSAP             Int?
+  isGMOrAbove       Boolean?
+}
+
+model Stationery_Item {
+  StationeryID             Int       @id(map: "PK_Stationery_Item") @default(autoincrement())
+  StationeryType           Int?
+  StationeryDescriptionEng String?   @db.NVarChar(Max)
+  StationeryDescriptionChi String?   @db.NVarChar(Max)
+  IsSet                    Boolean?
+  SetUnit                  String?   @db.NVarChar(15)
+  NumberOfSet              Int?
+  Unit                     String?   @db.NVarChar(5)
+  ContainModel             Boolean?
+  Price                    Decimal?  @db.Decimal(10, 2)
+  EffectiveDate            DateTime? @db.Date
+  Status                   Int?
+  CreatedOn                DateTime? @db.DateTime
+  CreatedBy                String?   @db.NVarChar(50)
+  ModifiedOn               DateTime? @db.DateTime
+  ModifiedBy               String?   @db.NVarChar(50)
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model Stationery_Item_20210331 {
+  StationeryID             Int       @default(autoincrement())
+  StationeryType           Int?
+  StationeryDescriptionEng String?   @db.NVarChar(Max)
+  StationeryDescriptionChi String?   @db.NVarChar(Max)
+  IsSet                    Boolean?
+  SetUnit                  String?   @db.NVarChar(15)
+  NumberOfSet              Int?
+  Unit                     String?   @db.NVarChar(5)
+  ContainModel             Boolean?
+  Price                    Decimal?  @db.Decimal(10, 2)
+  EffectiveDate            DateTime? @db.Date
+  Status                   Int?
+  CreatedOn                DateTime? @db.DateTime
+  CreatedBy                String?   @db.NVarChar(50)
+  ModifiedOn               DateTime? @db.DateTime
+  ModifiedBy               String?   @db.NVarChar(50)
+
+  @@ignore
+}
+
+model Stationery_Type {
+  StationeryTypeID   Int       @id(map: "PK_Stationery_Type") @default(autoincrement())
+  StationeryTypeName String?   @db.NVarChar(Max)
+  EffectiveDate      DateTime? @db.Date
+  Status             Int?
+  CreatedOn          DateTime? @db.DateTime
+  CreatedBy          String?   @db.NVarChar(50)
+  ModifiedOn         DateTime? @db.DateTime
+  ModifiedBy         String?   @db.NVarChar(50)
+}
+
+model WorkflowUserRole {
+  FlowName String @db.NVarChar(50)
+  Role     String @db.NVarChar(50)
+  User     String @db.NVarChar(50)
+
+  @@id([FlowName, Role, User], map: "PK_WorkflowUserRole")
+}

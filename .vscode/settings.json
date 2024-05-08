@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/3b084891-66aa-476b-b86f-57c6ac840ffb/resourceGroups/NFOpenAI4.0UAT/providers/Microsoft.Web/sites/teamai-ref-preview",
+    "appService.deploySubpath": "custom-tools"
+}
