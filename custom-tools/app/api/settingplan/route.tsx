@@ -1,5 +1,4 @@
-import prisma from '@/lib/primsa';
-import sql from 'mssql';
+
 import { NextApiRequest, NextApiResponse } from 'next'
 import { NextRequest, NextResponse } from 'next/server'
 import SeatingPlan from '@/data/seating_plan.json';
