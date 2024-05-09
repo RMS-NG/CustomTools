@@ -22,7 +22,7 @@ const HomePage = () => {
             .then((res) => {
                 if (!res.ok || res.status !== 200) {
                     setIsLoading(false);
-                    console.log("response failed")
+                    console.log("response failed");
                     //throw new Error('Network response was not ok');
                     return "[]";
                 }
