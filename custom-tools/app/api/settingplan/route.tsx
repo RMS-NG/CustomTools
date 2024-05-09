@@ -74,6 +74,8 @@ export const GET = async (req: NextRequest, res: NextResponse,) => {
 
     if (rtn == null) {
         rtn = [];
+    } else {
+        rtn = rtn.sort((a: any, b: any) => a.Name.localeCompare(b.Name));
     }
 
     return NextResponse.json(rtn);

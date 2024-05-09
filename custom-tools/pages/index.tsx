@@ -50,7 +50,9 @@ const HomePage = () => {
                 backgroundSize: 'cover',
                 backgroundPosition: 'top center',
             }}>
-            <div className="text-2xl mb-2 font-bold">Nan Fung 70th Anniversary</div>
+            <div className="pl-2 pr-2 mb-4">
+                <img src="/70th-logo-hori.png" alt="logo" className="w-full max-w-xl inline-block" />
+            </div>
             <form className="mb-4 w-full max-w-md">
                 <input
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 
