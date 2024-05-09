@@ -9,18 +9,29 @@ const HomePage = () => {
     const [showResult, setShowResult] = useState(false);
     const [name, setName] = useState('');
     const [results, setResults] = useState<any[]>([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     const Search = (e: any) => {
         e.preventDefault();
 
         if (name === '') return;
+        setIsLoading(true);
 
         //call web api to get the data
         fetch(`/api/settingplan?name=${name}`)
-            .then((res) => res.json())
+            .then((res) => {
+                if (!res.ok || res.status !== 200) {
+                    setIsLoading(false);
+                    console.log("response failed")
+                    //throw new Error('Network response was not ok');
+                    return "[]";
+                }
+                return res.text();
+            })
             .then((data) => {
                 console.log(data);
-                setResults(data);
+                setResults(JSON.parse(data));
+                setIsLoading(false);
             });
 
         setShowResult(true);
@@ -30,13 +41,15 @@ const HomePage = () => {
     const SearchByTable = (tableNo: any) => {
 
         if (tableNo === '') return;
+        setIsLoading(true);
 
         //call web api to get the data
         fetch(`/api/settingplan?tableNo=${tableNo}`)
-            .then((res) => res.json())
+            .then((res) => res?.json())
             .then((data) => {
                 console.log(data);
                 setResults(data);
+                setIsLoading(false)
             });
 
         setShowResult(true);
@@ -65,9 +78,10 @@ const HomePage = () => {
                 <button
                     className="mt-3 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full findTableBtn"
                     type="submit"
+                    disabled={isLoading}
                     onClick={(e) => Search(e)}
                 >
-                    Find Your Table No.
+                    {isLoading ? <div className="spinner-container"><div className="loading-spinner"></div></div> : 'Find Your Table No.'}
                 </button>
             </form>
 
