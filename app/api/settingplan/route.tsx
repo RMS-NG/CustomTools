@@ -1,7 +1,6 @@
 
 import { NextApiRequest, NextApiResponse } from 'next'
 import { NextRequest, NextResponse } from 'next/server'
-import SeatingPlan from '@/data/seating_plan.json';
 import fs from 'fs';
 import path from 'path';
 
@@ -20,12 +19,13 @@ export const POST = async (req: NextRequest, res: NextApiResponse,) => {
         // let a: any = req.headers["API-Key"];
         const data = await req.json();
         const jsonData = JSON.stringify(data, null, 2);
-        const filePath = path.resolve('data/seating_plan.json');
+        const filePath = path.resolve(process.cwd(), 'public', 'seating_plan.json');
 
         try {
             await fs.promises.writeFile(filePath, jsonData);
             return NextResponse.json({ message: 'Success' }, { status: 200 });
         } catch (err) {
+            console.error(err);
             return NextResponse.json({ message: 'Failed' }, { status: 500 });
         }
     } else {
@@ -37,6 +37,15 @@ export const POST = async (req: NextRequest, res: NextApiResponse,) => {
 
 // GET /api/filterPosts?searchString=:searchString
 export const GET = async (req: NextRequest, res: NextResponse,) => {
+
+    const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
+
+    let SeatingPlan: any = null;
+
+
+    await fetch(`${baseUrl}/seating_plan.json`)
+        .then(response => response.json())
+        .then(data => SeatingPlan = data);
 
     const param: any = req.nextUrl.searchParams ?? null;
     let rtn: any = null;
