@@ -200,6 +200,10 @@
     "TableNo": 7
   },
   {
+    "Name": "CUASO Terence Francis Go",
+    "TableNo": 7
+  },
+  {
     "Name": "FLETCHER Jonathan",
     "TableNo": 7
   },
@@ -229,10 +233,6 @@
   },
   {
     "Name": "WHITTEN Denny",
-    "TableNo": 7
-  },
-  {
-    "Name": "ZHOU Meng",
     "TableNo": 7
   },
   {
@@ -1100,8 +1100,8 @@
     "TableNo": 28
   },
   {
-    "Name": "CUASO Terence Francis Go",
-    "TableNo": 28
+    "Name": "ZHOU Meng",
+    "TableNo": 7
   },
   {
     "Name": "HUI Ka Sin Nicky",
@@ -1109,6 +1109,10 @@
   },
   {
     "Name": "LEUNG Ka Ho Izaac",
+    "TableNo": 28
+  },
+  {
+    "Name": "LI Hoi Yu Elvis",
     "TableNo": 28
   },
   {
@@ -1132,10 +1136,6 @@
     "TableNo": 28
   },
   {
-    "Name": "ZHAO Chenchen",
-    "TableNo": 28
-  },
-  {
     "Name": "AU-YEUNG Hoi Fung Emily",
     "TableNo": 29
   },
@@ -1156,8 +1156,8 @@
     "TableNo": 29
   },
   {
-    "Name": "LI Hoi Yu Elvis",
-    "TableNo": 29
+    "Name": "ZHAO Chenchen",
+    "TableNo": 28
   },
   {
     "Name": "PANG Shing Kit David",
@@ -2200,10 +2200,6 @@
     "TableNo": 51
   },
   {
-    "Name": "TSOI Wai Leung Marco",
-    "TableNo": 51
-  },
-  {
     "Name": "WU Yin Kiu Nita",
     "TableNo": 51
   },
@@ -2400,10 +2396,6 @@
     "TableNo": 57
   },
   {
-    "Name": "TANG Wai Kong",
-    "TableNo": 57
-  },
-  {
     "Name": "TSANG Yun Sun",
     "TableNo": 57
   },
@@ -2488,11 +2480,11 @@
     "TableNo": 59
   },
   {
-    "Name": "LEUNG Cheung Ling Dorcas",
+    "Name": "LEUNG Wing Ada",
     "TableNo": 59
   },
   {
-    "Name": "LEUNG Wing Ada",
+    "Name": "LI Cheuk Yin Bruce",
     "TableNo": 59
   },
   {
@@ -2505,10 +2497,6 @@
   },
   {
     "Name": "POON Wing Keung",
-    "TableNo": 59
-  },
-  {
-    "Name": "WANG Weiwei",
     "TableNo": 59
   },
   {
@@ -2972,7 +2960,7 @@
     "TableNo": 72
   },
   {
-    "Name": "CHU Pei Hei Carol",
+    "Name": "CHU Pei Hei",
     "TableNo": 72
   },
   {
@@ -3528,7 +3516,7 @@
     "TableNo": 85
   },
   {
-    "Name": "NG Chau Yuen",
+    "Name": "NG Chau Yuen Sandy",
     "TableNo": 85
   },
   {
@@ -3568,6 +3556,10 @@
     "TableNo": 87
   },
   {
+    "Name": "SHIH Ching Yi Patrick",
+    "TableNo": 87
+  },
+  {
     "Name": "TANG Ming Wai",
     "TableNo": 87
   },
@@ -3577,10 +3569,6 @@
   },
   {
     "Name": "WONG Yick Ho",
-    "TableNo": 87
-  },
-  {
-    "Name": "YEUNG Yiu Kei",
     "TableNo": 87
   },
   {
@@ -3620,15 +3608,15 @@
     "TableNo": 88
   },
   {
+    "Name": "YAU Yuk Yee Alex",
+    "TableNo": 88
+  },
+  {
     "Name": "YEUNG Chun Kit",
     "TableNo": 88
   },
   {
     "Name": "YEUNG Ka Mei",
-    "TableNo": 88
-  },
-  {
-    "Name": "YUNG Wing Chi",
     "TableNo": 88
   },
   {
@@ -3708,6 +3696,10 @@
     "TableNo": 90
   },
   {
+    "Name": "LO Ka Shing",
+    "TableNo": 90
+  },
+  {
     "Name": "NG Wan Kong",
     "TableNo": 90
   },
@@ -3721,10 +3713,6 @@
   },
   {
     "Name": "WONG Hok Hung",
-    "TableNo": 90
-  },
-  {
-    "Name": "YEUNG Chun Wai Gary",
     "TableNo": 90
   },
   {
@@ -3900,16 +3888,16 @@
     "TableNo": "Head Table"
   },
   {
-    "Name": "YUEN Kin Fai Leo",
+    "Name": "WANG Weiwei",
     "TableNo": 59
+  },
+  {
+    "Name": "YEUNG Chun Wai Gary",
+    "TableNo": 90
   },
   {
     "Name": "WONG Kam Shan",
     "TableNo": 79
-  },
-  {
-    "Name": "ZHU Helen Yue",
-    "TableNo": 7
   },
   {
     "Name": "YIP Wai Chun",
@@ -3942,5 +3930,17 @@
   {
     "Name": "WONG Yiu Ngan",
     "TableNo": 89
+  },
+  {
+    "Name": "YEUNG Yiu Kei",
+    "TableNo": 87
+  },
+  {
+    "Name": "YUNG Wing Chi",
+    "TableNo": 88
+  },
+  {
+    "Name": "YUEN Kin Fai Leo",
+    "TableNo": 59
   }
 ]

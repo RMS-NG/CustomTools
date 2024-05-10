@@ -59,12 +59,12 @@ const HomePage = () => {
     return (
         <div className="px-4 py-5 sm:p-6 flex flex-col justify-center items-center min-h-screen"
             style={{
-                backgroundImage: "url('/bg-large.jpg')",
+                backgroundImage: "url('/bg-large.webp')",
                 backgroundSize: 'cover',
                 backgroundPosition: 'top center',
             }}>
             <div className="pl-2 pr-2 mb-4">
-                <img src="/70th-logo-hori.png" alt="logo" className="w-full max-w-xl inline-block" />
+                <img src="/70th-logo-hori.webp" alt="logo" className="w-full max-w-xl inline-block" />
             </div>
             <form className="mb-4 w-full max-w-md">
                 <input
